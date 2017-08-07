@@ -13,4 +13,29 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.1" % "test",
   "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
 )
-        
+
+scalacOptions := Seq("-unchecked", "-deprecation")
+
+licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
+
+homepage := Some(url("https://github.com/carldata/hydra-streams"))
+
+scmInfo := Some(
+  ScmInfo(
+    url("https://github.com/carldata/hydra-streams"),
+    "scm:git@github.com:carldata/hydra-streams.git"
+  )
+)
+
+developers := List(
+  Developer(
+    id = "klangner",
+    name = "Krzysztof Langner",
+    email = "klangner@gmail.com",
+    url = url("http://github/klangner")
+  )
+)
+
+useGpg := true
+
+pomIncludeRepository := { _ => false }

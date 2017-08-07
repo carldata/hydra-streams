@@ -12,7 +12,7 @@ object RealTime {
 
   case object RemoveAction extends Action
 
-  case object EmptyAction extends Action
+  case object UnknownAction extends Action
 
   case class RealTimeRecord(action: Action, calculation: String, script: String, trigger: String, outputChannel: String)
 
@@ -24,7 +24,7 @@ object RealTime {
           r.action match {
             case AddAction => "action" -> JsString("AddAction")
             case RemoveAction => "action" -> JsString("RemoveAction")
-            case EmptyAction => "action" -> JsString("")
+            case UnknownAction => "action" -> JsString("")
           },
           "calculation" -> JsString(r.calculation),
           "script" -> JsString(r.script),
@@ -34,17 +34,17 @@ object RealTime {
 
       def read(value: JsValue): RealTimeRecord = value match {
         case JsObject(fs) =>
-          val action: Action = fs.get("action").map(x => x match {
+          val action: Action = fs.get("action").map {
             case JsString("AddAction") => AddAction
             case JsString("RemoveAction") => RemoveAction
-            case _ => EmptyAction
-          }).get
+            case _ => UnknownAction
+          }.getOrElse(UnknownAction)
           val calculation: String = fs.get("calculation").map(stringFromValue).getOrElse("")
           val script: String = fs.get("script").map(stringFromValue).getOrElse("")
           val trigger: String = fs.get("trigger").map(stringFromValue).getOrElse("")
           val outputChannel: String = fs.get("outputChannel").map(stringFromValue).getOrElse("")
           RealTimeRecord(action, calculation, script, trigger, outputChannel)
-        case _ => RealTimeRecord(EmptyAction, "json-format-error", "", "", "")
+        case _ => RealTimeRecord(UnknownAction, "json-format-error", "", "", "")
       }
     }
 
