@@ -2,8 +2,10 @@ package carldata.hs
 
 import java.time.LocalDateTime
 
-import carldata.hs.Data.DataRecord
 import carldata.hs.Data.DataJsonProtocol._
+import carldata.hs.Data.DataRecord
+import carldata.hs.RealTime.RealTimeJsonProtocol._
+import carldata.hs.RealTime.{AddAction, RealTimeRecord}
 import org.scalatest.{FlatSpec, Matchers}
 import spray.json.JsonParser
 
@@ -19,6 +21,15 @@ class VersionTest extends FlatSpec with Matchers {
       """.stripMargin
     val rec = JsonParser(source).convertTo[DataRecord]
     rec shouldBe DataRecord("A", LocalDateTime.of(2015, 1, 1, 0, 0, 0), 100)
+  }
+
+  "RealTimeRecord" should "parse json version 1" in {
+    val source =
+      """
+        |{"action": "AddAction", "calculation": "C", "script": "S", "trigger" : "T", "outputChannel" : "oC"}
+      """.stripMargin
+    val rec = JsonParser(source).convertTo[RealTimeRecord]
+    rec shouldBe RealTimeRecord(AddAction, "C", "S", "T", "oC")
   }
 
 }
