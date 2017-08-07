@@ -1,21 +1,19 @@
 package carldata.hs
 
-import spray.json._
-import carldata.hs.RealTime.RealTimeRecord
 import carldata.hs.RealTime.RealTimeJsonProtocol._
+import carldata.hs.RealTime.{AddAction, RealTimeRecord, RemoveAction}
 import org.scalacheck.Prop.forAll
-import org.scalacheck.{Arbitrary, Gen, Properties}
+import org.scalacheck.{Gen, Properties}
+import spray.json._
 
 object RealTimeCheck extends Properties("RealTime") {
-  
-  val genScript = for {
-    spec <- Gen.oneOf(Seq('\n', '\t', ' '))
-    unicode <- Arbitrary.arbString.arbitrary
-    str <- Gen.alphaNumStr
-  } yield List(spec, unicode, str).mkString
+
+  private val genScript = for {
+    ls <- Gen.listOf(Gen.alphaNumStr)
+  } yield ls.mkString("\n")
 
   private val realtimeRecordGen = for {
-    action <- Gen.identifier
+    action <- Gen.oneOf(AddAction, RemoveAction)
     calculation <- Gen.identifier
     script <- genScript
     trigger <- Gen.identifier
