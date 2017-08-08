@@ -4,6 +4,8 @@ import java.time.LocalDateTime
 
 import carldata.hs.Data.DataJsonProtocol._
 import carldata.hs.Data.DataRecord
+import carldata.hs.EventBus.EventBusRecordJsonProtocol._
+import carldata.hs.EventBus.{BatchCalculationStarted, EventBusRecord}
 import carldata.hs.RealTime.RealTimeJsonProtocol._
 import carldata.hs.RealTime.{AddAction, RealTimeRecord}
 import org.scalatest.{FlatSpec, Matchers}
@@ -32,4 +34,12 @@ class VersionTest extends FlatSpec with Matchers {
     rec shouldBe RealTimeRecord(AddAction, "C", "S", "T", "oC")
   }
 
+  "EventBusRecord" should "parse json version 1" in {
+    val source =
+      """
+        |{"calculationId": "C", "status": "BatchCalculationStarted" }
+      """.stripMargin
+    val rec = JsonParser(source).convertTo[EventBusRecord]
+    rec shouldBe EventBusRecord("C", BatchCalculationStarted)
+  }
 }
