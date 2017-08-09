@@ -15,7 +15,7 @@ object EventBus {
 
   object EventBusRecordJsonProtocol extends DefaultJsonProtocol {
 
-    implicit object BatchRecordJsonFormat extends RootJsonFormat[EventBusRecord] {
+    implicit object EventBusRecordJsonFormat extends RootJsonFormat[EventBusRecord] {
       def write(r: EventBusRecord) =
         JsObject("calculationId" -> JsString(r.calculationId),
           r.status match {
