@@ -2,6 +2,8 @@ package carldata.hs
 
 import java.time.LocalDateTime
 
+import carldata.hs.Batch.BatchRecordJsonProtocol._
+import carldata.hs.Batch.BatchRecord
 import carldata.hs.Data.DataJsonProtocol._
 import carldata.hs.Data.DataRecord
 import carldata.hs.EventBus.EventBusRecordJsonProtocol._
@@ -42,6 +44,7 @@ class VersionTest extends FlatSpec with Matchers {
     val rec = JsonParser(source).convertTo[EventBusRecord]
     rec shouldBe EventBusRecord("C", BatchCalculationStarted)
   }
+
   "BatchRecord" should "parse json version 1" in {
     val source =
       """
@@ -50,5 +53,4 @@ class VersionTest extends FlatSpec with Matchers {
     val rec = JsonParser(source).convertTo[BatchRecord]
     rec shouldBe BatchRecord("CId", "S", "IcId", "OcId", LocalDateTime.of(2015, 1, 1, 0, 0, 0), LocalDateTime.of(2015, 1, 1, 0, 0, 0))
   }
-
 }
