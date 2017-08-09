@@ -42,4 +42,13 @@ class VersionTest extends FlatSpec with Matchers {
     val rec = JsonParser(source).convertTo[EventBusRecord]
     rec shouldBe EventBusRecord("C", BatchCalculationStarted)
   }
+  "BatchRecord" should "parse json version 1" in {
+    val source =
+      """
+        |{"calculationId": "CId", "script": "S", "inputChannelId": "IcId", "outputChannelId" : "OcId", "startDate" : "2015-01-01T00:00:00", "endDate": "2015-01-01T00:00:00" }
+      """.stripMargin
+    val rec = JsonParser(source).convertTo[BatchRecord]
+    rec shouldBe BatchRecord("CId", "S", "IcId", "OcId", LocalDateTime.of(2015, 1, 1, 0, 0, 0), LocalDateTime.of(2015, 1, 1, 0, 0, 0))
+  }
+
 }
