@@ -30,10 +30,15 @@ class VersionTest extends FlatSpec with Matchers {
   "RealTimeRecord" should "parse json version 1" in {
     val source =
       """
-        |{"action": "AddAction", "calculation": "C", "script": "S", "trigger" : "T", "outputChannel" : "oC"}
+        |{
+        |"action": "AddAction",
+        |"calculation": "C",
+        |"script": ["line1", "line2"],
+        |"trigger" : "T",
+        |"outputChannel" : "oC"}
       """.stripMargin
     val rec = JsonParser(source).convertTo[RealTimeRecord]
-    rec shouldBe RealTimeRecord(AddAction, "C", "S", "T", "oC")
+    rec shouldBe RealTimeRecord(AddAction, "C", List("line1", "line2").mkString("\n"), "T", "oC")
   }
 
   "EventBusRecord" should "parse json version 1" in {
@@ -48,9 +53,15 @@ class VersionTest extends FlatSpec with Matchers {
   "BatchRecord" should "parse json version 1" in {
     val source =
       """
-        |{"calculationId": "CId", "script": "S", "inputChannelId": "IcId", "outputChannelId" : "OcId", "startDate" : "2015-01-01T00:00:00", "endDate": "2015-01-01T00:00:00" }
+        |{"calculationId": "CId",
+        |"script": ["line1", "line2"],
+        |"inputChannelId": "IcId",
+        |"outputChannelId" : "OcId",
+        |"startDate" : "2015-01-01T00:00:00",
+        |"endDate": "2015-01-01T00:00:00" }
       """.stripMargin
     val rec = JsonParser(source).convertTo[BatchRecord]
-    rec shouldBe BatchRecord("CId", "S", "IcId", "OcId", LocalDateTime.of(2015, 1, 1, 0, 0, 0), LocalDateTime.of(2015, 1, 1, 0, 0, 0))
+    rec shouldBe BatchRecord("CId", List("line1", "line2").mkString("\n"), "IcId", "OcId",
+      LocalDateTime.of(2015, 1, 1, 0, 0, 0), LocalDateTime.of(2015, 1, 1, 0, 0, 0))
   }
 }
