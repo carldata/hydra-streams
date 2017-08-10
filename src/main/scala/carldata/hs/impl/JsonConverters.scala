@@ -3,7 +3,7 @@ package carldata.hs.impl
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-import spray.json.{JsNumber, JsString, JsValue}
+import spray.json.{JsArray, JsNumber, JsString, JsValue}
 
 /**
   * Custom function for simplify json access
@@ -29,6 +29,11 @@ object JsonConverters {
   def floatFromValue(jsVal: JsValue): Float = jsVal match {
     case JsNumber(v) => v.toFloat
     case _ => 0f
+  }
+
+  def textFromLines(jsVal: JsValue): String = jsVal match {
+    case JsArray(vs) => vs.map(stringFromValue).mkString("\n")
+    case _ => ""
   }
 
 }

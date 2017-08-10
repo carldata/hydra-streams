@@ -12,7 +12,7 @@ object BatchRecordCheck extends Properties("Batch")  {
 
   private val genScript = for {
     ls <- Gen.listOf(Gen.alphaNumStr)
-  } yield ls.mkString("\n")
+  } yield ls.mkString("\n").trim
 
   private val batchRecordGen = for {
     calculationId <- Gen.identifier
