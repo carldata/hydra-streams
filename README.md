@@ -9,7 +9,7 @@ Protocol specification and implementation for Hydra
  
  Add the following dependency to the build.sbt
  ```scala
- libraryDependencies += "io.github.carldata" %% "hydra-streams" % "0.1.0"
+ libraryDependencies += "io.github.carldata" %% "hydra-streams" % "0.2.0"
  ```
 
 

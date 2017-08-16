@@ -10,7 +10,7 @@ object RealTimeCheck extends Properties("RealTime") {
 
   private val genScript = for {
     ls <- Gen.listOf(Gen.alphaNumStr)
-  } yield ls.mkString("\n")
+  } yield ls.mkString("\n").trim
 
   private val realtimeRecordGen = for {
     action <- Gen.oneOf(AddAction, RemoveAction)
@@ -22,7 +22,8 @@ object RealTimeCheck extends Properties("RealTime") {
 
   /** Record serialized to json and then parsed back should be the same */
   property("parse") = forAll(realtimeRecordGen) { record: RealTimeRecord =>
-    val source: String = record.toJson.prettyPrint
-    source.parseJson.convertTo[RealTimeRecord] == record
+    val source: String = record.toJson.compactPrint
+    val r2 = source.parseJson.convertTo[RealTimeRecord]
+    r2 == record
   }
 }
