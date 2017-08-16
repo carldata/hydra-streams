@@ -11,7 +11,9 @@ libraryDependencies ++= Seq(
   "io.spray" %%  "spray-json" % "1.3.3",
   // Test dependencies
   "org.scalatest" %% "scalatest" % "3.0.1" % "test",
-  "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
+  "org.scalacheck" %% "scalacheck" % "1.13.4" % "test",
+  "org.apache.avro" % "avro" % "1.8.2" % "test",
+  "ch.qos.logback" % "logback-classic" % "1.2.3" % "test"
 )
 
 scalacOptions := Seq("-unchecked", "-deprecation")

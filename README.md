@@ -12,6 +12,16 @@ Protocol specification and implementation for Hydra
  libraryDependencies += "io.github.carldata" %% "hydra-streams" % "0.1.0"
  ```
 
+
+## Build
+
+Compile AVRO schema
+
+```bash
+java -jar ~/bin/avro/avro-tools-1.8.2.jar compile schema avro/data.avpr src/test/scala
+```
+
+
 # Join in!
 
 We are happy to receive bug reports, fixes, documentation enhancements,

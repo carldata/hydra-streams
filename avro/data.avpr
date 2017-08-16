@@ -1,0 +1,9 @@
+{"namespace": "carldata.hs.avro",
+ "type": "record",
+ "name": "DataAvro",
+ "fields": [
+     {"name": "channel", "type": "string"},
+     {"name": "timestamp",  "type": "string"},
+     {"name": "value", "type": "float"}
+ ]
+}

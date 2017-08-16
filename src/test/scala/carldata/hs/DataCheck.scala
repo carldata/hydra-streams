@@ -5,11 +5,12 @@ import java.time.LocalDateTime
 import spray.json._
 import carldata.hs.Data.DataRecord
 import carldata.hs.Data.DataJsonProtocol._
+import carldata.hs.avro.DataAvro
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Gen, Properties}
 
 /**
-  * Property checks for DataRecord
+  * Property checks for DataAvro
   */
 object DataCheck extends Properties("Data") {
 
@@ -23,6 +24,13 @@ object DataCheck extends Properties("Data") {
   property("parse") = forAll(dataRecordGen) { record: DataRecord =>
     val source: String = record.toJson.prettyPrint
     source.parseJson.convertTo[DataRecord] == record
+  }
+
+  /** Check avro compatibility */
+  property("AVRO") = forAll(dataRecordGen) { rec: DataRecord =>
+    val avro: DataAvro = new DataAvro(rec.channel, rec.ts.toString, rec.value)
+    val str: String = avro.toString
+    str.parseJson.convertTo[DataRecord] == rec
   }
 
 }
