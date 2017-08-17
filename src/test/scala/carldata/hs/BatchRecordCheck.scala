@@ -9,7 +9,6 @@ import org.scalacheck.Prop.forAll
 import org.scalacheck.{Gen, Properties}
 import spray.json._
 
-import scala.collection.mutable.ListBuffer
 import scala.collection.JavaConverters._
 
 object BatchRecordCheck extends Properties("Batch")  {
