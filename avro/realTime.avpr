@@ -1,0 +1,15 @@
+{"namespace": "carldata.hs.avro",
+ "type": "record",
+ "name": "RealTimeRecordAvro",
+ "fields": [
+     {"name": "action", "type": {
+        "type": "enum",
+        "name": "RealTimeRecordActionAvro",
+        "symbols" : ["AddAction", "RemoveAction", "UnkownAction"]
+     }},
+     {"name": "calculation", "type": "string"},
+     {"name": "script", "type": {"type": "array", "items": "string"}},
+     {"name": "trigger", "type": "string"},
+     {"name": "outputChannel", "type": "string"}
+ ]
+}

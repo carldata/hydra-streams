@@ -2,9 +2,12 @@ package carldata.hs
 
 import carldata.hs.RealTime.RealTimeJsonProtocol._
 import carldata.hs.RealTime.{AddAction, RealTimeRecord, RemoveAction}
+import carldata.hs.avro.{RealTimeRecordActionAvro, RealTimeRecordAvro}
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Gen, Properties}
 import spray.json._
+
+import scala.collection.JavaConverters.seqAsJavaList
 
 object RealTimeCheck extends Properties("RealTime") {
 
@@ -25,5 +28,17 @@ object RealTimeCheck extends Properties("RealTime") {
     val source: String = record.toJson.compactPrint
     val r2 = source.parseJson.convertTo[RealTimeRecord]
     r2 == record
+  }
+
+  /** Check avro compatibility */
+  property("AVRO") = forAll(realtimeRecordGen) { rec: RealTimeRecord =>
+    val avro: RealTimeRecordAvro = new RealTimeRecordAvro(
+      RealTimeRecordActionAvro.valueOf(rec.action.toString),
+      rec.calculation,
+      seqAsJavaList(rec.script.split("\n")),
+      rec.trigger,
+      rec.outputChannel)
+    val avroStr = avro.toString
+    avroStr.parseJson.convertTo[RealTimeRecord] == rec
   }
 }
