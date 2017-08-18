@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -4674217060278326537L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RealTimeRecordAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"action\",\"type\":{\"type\":\"enum\",\"name\":\"RealTimeRecordActionAvro\",\"symbols\":[\"AddAction\",\"RemoveAction\",\"UnkownAction\"]}},{\"name\":\"calculation\",\"type\":\"string\"},{\"name\":\"script\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"trigger\",\"type\":\"string\"},{\"name\":\"outputChannel\",\"type\":\"string\"}]}");
+  private static final long serialVersionUID = 1096106388267009096L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RealTimeRecordAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"action\",\"type\":{\"type\":\"enum\",\"name\":\"RealTimeRecordActionAvro\",\"symbols\":[\"AddAction\",\"RemoveAction\",\"UnknownAction\"]}},{\"name\":\"calculation\",\"type\":\"string\"},{\"name\":\"script\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"trigger\",\"type\":\"string\"},{\"name\":\"outputChannel\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();

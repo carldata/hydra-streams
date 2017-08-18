@@ -5,7 +5,7 @@
      {"name": "action", "type": {
         "type": "enum",
         "name": "RealTimeRecordActionAvro",
-        "symbols" : ["AddAction", "RemoveAction", "UnkownAction"]
+        "symbols" : ["AddAction", "RemoveAction", "UnknownAction"]
      }},
      {"name": "calculation", "type": "string"},
      {"name": "script", "type": {"type": "array", "items": "string"}},

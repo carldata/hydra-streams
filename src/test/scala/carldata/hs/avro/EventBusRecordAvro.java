@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 6293594821190685383L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventBusRecordAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"calculationId\",\"type\":\"string\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"EventBusRecordStatusAvro\",\"symbols\":[\"BatchCalculationStarted\",\"BatchCalculationStopped\",\"BatchCalculationUnkown\"]}}]}");
+  private static final long serialVersionUID = -4230695410314063730L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventBusRecordAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"calculationId\",\"type\":\"string\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"EventBusRecordStatusAvro\",\"symbols\":[\"BatchCalculationStarted\",\"BatchCalculationStopped\",\"Unkown\"]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();

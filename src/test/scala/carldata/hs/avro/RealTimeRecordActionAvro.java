@@ -7,7 +7,7 @@ package carldata.hs.avro;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public enum RealTimeRecordActionAvro {
-  AddAction, RemoveAction, UnkownAction  ;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"RealTimeRecordActionAvro\",\"namespace\":\"carldata.hs.avro\",\"symbols\":[\"AddAction\",\"RemoveAction\",\"UnkownAction\"]}");
+  AddAction, RemoveAction, UnknownAction  ;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"enum\",\"name\":\"RealTimeRecordActionAvro\",\"namespace\":\"carldata.hs.avro\",\"symbols\":[\"AddAction\",\"RemoveAction\",\"UnknownAction\"]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 }
