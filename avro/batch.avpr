@@ -1,0 +1,12 @@
+{"namespace": "carldata.hs.avro",
+ "type": "record",
+ "name": "BatchRecordAvro",
+ "fields": [
+     {"name": "calculationId", "type": "string"},
+     {"name": "script", "type": {"type": "array", "items": "string"}},
+     {"name": "inputChannelId", "type": "string"},
+     {"name": "outputChannelId", "type": "string"},
+     {"name": "startDate", "type": "string"},
+     {"name": "endDate",  "type": "string"}
+ ]
+}

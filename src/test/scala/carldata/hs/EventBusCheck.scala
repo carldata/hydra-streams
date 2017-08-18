@@ -1,7 +1,8 @@
 package carldata.hs
 
 import carldata.hs.EventBus.EventBusRecordJsonProtocol._
-import carldata.hs.EventBus.{BatchCalculationStarted, BatchCalculationStopped, EventBusRecord, Status}
+import carldata.hs.EventBus.{BatchCalculationStarted, BatchCalculationStopped, EventBusRecord}
+import carldata.hs.avro.{EventBusRecordAvro, EventBusRecordStatusAvro}
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Gen, Properties}
 import spray.json._
@@ -23,4 +24,12 @@ object EventBusCheck extends Properties("EventBus") {
     source.parseJson.convertTo[EventBusRecord] == record
   }
 
+  /** Check avro compatibility */
+  property("AVRO") = forAll(dataRecordGen) { rec: EventBusRecord =>
+    val avro: EventBusRecordAvro = new EventBusRecordAvro(
+      rec.calculationId,
+      EventBusRecordStatusAvro.valueOf(rec.status.toString))
+    val avroStr = avro.toString
+    avroStr.parseJson.convertTo[EventBusRecord] == rec
+  }
 }
