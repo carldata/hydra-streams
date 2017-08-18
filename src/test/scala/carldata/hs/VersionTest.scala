@@ -21,7 +21,7 @@ class VersionTest extends FlatSpec with Matchers {
   "DataRecord" should "parse json version 1" in {
     val source =
       """
-        |{"channel": "A", "timestamp": "2015-01-01T00:00:00", "value": 100}
+        |{"channelId": "A", "timestamp": "2015-01-01T00:00:00", "value": 100}
       """.stripMargin
     val rec = JsonParser(source).convertTo[DataRecord]
     rec shouldBe DataRecord("A", LocalDateTime.of(2015, 1, 1, 0, 0, 0), 100)
@@ -32,10 +32,10 @@ class VersionTest extends FlatSpec with Matchers {
       """
         |{
         |"action": "AddAction",
-        |"calculation": "C",
+        |"calculationId": "C",
         |"script": ["line1", "line2"],
         |"trigger" : "T",
-        |"outputChannel" : "oC"}
+        |"outputChannelId" : "oC"}
       """.stripMargin
     val rec = JsonParser(source).convertTo[RealTimeRecord]
     rec shouldBe RealTimeRecord(AddAction, "C", List("line1", "line2").mkString("\n"), "T", "oC")

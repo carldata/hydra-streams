@@ -28,7 +28,7 @@ object DataCheck extends Properties("Data") {
 
   /** Check avro compatibility */
   property("AVRO") = forAll(dataRecordGen) { rec: DataRecord =>
-    val avro: DataAvro = new DataAvro(rec.channel, rec.ts.toString, rec.value)
+    val avro: DataAvro = new DataAvro(rec.channelId, rec.timestamp.toString, rec.value)
     val str: String = avro.toString
     str.parseJson.convertTo[DataRecord] == rec
   }

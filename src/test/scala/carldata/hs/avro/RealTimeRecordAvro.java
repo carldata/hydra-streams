@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 1096106388267009096L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RealTimeRecordAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"action\",\"type\":{\"type\":\"enum\",\"name\":\"RealTimeRecordActionAvro\",\"symbols\":[\"AddAction\",\"RemoveAction\",\"UnknownAction\"]}},{\"name\":\"calculation\",\"type\":\"string\"},{\"name\":\"script\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"trigger\",\"type\":\"string\"},{\"name\":\"outputChannel\",\"type\":\"string\"}]}");
+  private static final long serialVersionUID = -6027129808311582605L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RealTimeRecordAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"action\",\"type\":{\"type\":\"enum\",\"name\":\"RealTimeRecordActionAvro\",\"symbols\":[\"AddAction\",\"RemoveAction\",\"UnknownAction\"]}},{\"name\":\"calculationId\",\"type\":\"string\"},{\"name\":\"script\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"trigger\",\"type\":\"string\"},{\"name\":\"outputChannelId\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -52,10 +52,10 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
   }
 
   @Deprecated public carldata.hs.avro.RealTimeRecordActionAvro action;
-  @Deprecated public java.lang.CharSequence calculation;
+  @Deprecated public java.lang.CharSequence calculationId;
   @Deprecated public java.util.List<java.lang.CharSequence> script;
   @Deprecated public java.lang.CharSequence trigger;
-  @Deprecated public java.lang.CharSequence outputChannel;
+  @Deprecated public java.lang.CharSequence outputChannelId;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -67,17 +67,17 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
   /**
    * All-args constructor.
    * @param action The new value for action
-   * @param calculation The new value for calculation
+   * @param calculationId The new value for calculationId
    * @param script The new value for script
    * @param trigger The new value for trigger
-   * @param outputChannel The new value for outputChannel
+   * @param outputChannelId The new value for outputChannelId
    */
-  public RealTimeRecordAvro(carldata.hs.avro.RealTimeRecordActionAvro action, java.lang.CharSequence calculation, java.util.List<java.lang.CharSequence> script, java.lang.CharSequence trigger, java.lang.CharSequence outputChannel) {
+  public RealTimeRecordAvro(carldata.hs.avro.RealTimeRecordActionAvro action, java.lang.CharSequence calculationId, java.util.List<java.lang.CharSequence> script, java.lang.CharSequence trigger, java.lang.CharSequence outputChannelId) {
     this.action = action;
-    this.calculation = calculation;
+    this.calculationId = calculationId;
     this.script = script;
     this.trigger = trigger;
-    this.outputChannel = outputChannel;
+    this.outputChannelId = outputChannelId;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -85,10 +85,10 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
   public java.lang.Object get(int field$) {
     switch (field$) {
     case 0: return action;
-    case 1: return calculation;
+    case 1: return calculationId;
     case 2: return script;
     case 3: return trigger;
-    case 4: return outputChannel;
+    case 4: return outputChannelId;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -98,10 +98,10 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
     case 0: action = (carldata.hs.avro.RealTimeRecordActionAvro)value$; break;
-    case 1: calculation = (java.lang.CharSequence)value$; break;
+    case 1: calculationId = (java.lang.CharSequence)value$; break;
     case 2: script = (java.util.List<java.lang.CharSequence>)value$; break;
     case 3: trigger = (java.lang.CharSequence)value$; break;
-    case 4: outputChannel = (java.lang.CharSequence)value$; break;
+    case 4: outputChannelId = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -123,19 +123,19 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
   }
 
   /**
-   * Gets the value of the 'calculation' field.
-   * @return The value of the 'calculation' field.
+   * Gets the value of the 'calculationId' field.
+   * @return The value of the 'calculationId' field.
    */
-  public java.lang.CharSequence getCalculation() {
-    return calculation;
+  public java.lang.CharSequence getCalculationId() {
+    return calculationId;
   }
 
   /**
-   * Sets the value of the 'calculation' field.
+   * Sets the value of the 'calculationId' field.
    * @param value the value to set.
    */
-  public void setCalculation(java.lang.CharSequence value) {
-    this.calculation = value;
+  public void setCalculationId(java.lang.CharSequence value) {
+    this.calculationId = value;
   }
 
   /**
@@ -171,19 +171,19 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
   }
 
   /**
-   * Gets the value of the 'outputChannel' field.
-   * @return The value of the 'outputChannel' field.
+   * Gets the value of the 'outputChannelId' field.
+   * @return The value of the 'outputChannelId' field.
    */
-  public java.lang.CharSequence getOutputChannel() {
-    return outputChannel;
+  public java.lang.CharSequence getOutputChannelId() {
+    return outputChannelId;
   }
 
   /**
-   * Sets the value of the 'outputChannel' field.
+   * Sets the value of the 'outputChannelId' field.
    * @param value the value to set.
    */
-  public void setOutputChannel(java.lang.CharSequence value) {
-    this.outputChannel = value;
+  public void setOutputChannelId(java.lang.CharSequence value) {
+    this.outputChannelId = value;
   }
 
   /**
@@ -219,10 +219,10 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
     implements org.apache.avro.data.RecordBuilder<RealTimeRecordAvro> {
 
     private carldata.hs.avro.RealTimeRecordActionAvro action;
-    private java.lang.CharSequence calculation;
+    private java.lang.CharSequence calculationId;
     private java.util.List<java.lang.CharSequence> script;
     private java.lang.CharSequence trigger;
-    private java.lang.CharSequence outputChannel;
+    private java.lang.CharSequence outputChannelId;
 
     /** Creates a new Builder */
     private Builder() {
@@ -239,8 +239,8 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
         this.action = data().deepCopy(fields()[0].schema(), other.action);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.calculation)) {
-        this.calculation = data().deepCopy(fields()[1].schema(), other.calculation);
+      if (isValidValue(fields()[1], other.calculationId)) {
+        this.calculationId = data().deepCopy(fields()[1].schema(), other.calculationId);
         fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.script)) {
@@ -251,8 +251,8 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
         this.trigger = data().deepCopy(fields()[3].schema(), other.trigger);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.outputChannel)) {
-        this.outputChannel = data().deepCopy(fields()[4].schema(), other.outputChannel);
+      if (isValidValue(fields()[4], other.outputChannelId)) {
+        this.outputChannelId = data().deepCopy(fields()[4].schema(), other.outputChannelId);
         fieldSetFlags()[4] = true;
       }
     }
@@ -267,8 +267,8 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
         this.action = data().deepCopy(fields()[0].schema(), other.action);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.calculation)) {
-        this.calculation = data().deepCopy(fields()[1].schema(), other.calculation);
+      if (isValidValue(fields()[1], other.calculationId)) {
+        this.calculationId = data().deepCopy(fields()[1].schema(), other.calculationId);
         fieldSetFlags()[1] = true;
       }
       if (isValidValue(fields()[2], other.script)) {
@@ -279,8 +279,8 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
         this.trigger = data().deepCopy(fields()[3].schema(), other.trigger);
         fieldSetFlags()[3] = true;
       }
-      if (isValidValue(fields()[4], other.outputChannel)) {
-        this.outputChannel = data().deepCopy(fields()[4].schema(), other.outputChannel);
+      if (isValidValue(fields()[4], other.outputChannelId)) {
+        this.outputChannelId = data().deepCopy(fields()[4].schema(), other.outputChannelId);
         fieldSetFlags()[4] = true;
       }
     }
@@ -325,40 +325,40 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
     }
 
     /**
-      * Gets the value of the 'calculation' field.
+      * Gets the value of the 'calculationId' field.
       * @return The value.
       */
-    public java.lang.CharSequence getCalculation() {
-      return calculation;
+    public java.lang.CharSequence getCalculationId() {
+      return calculationId;
     }
 
     /**
-      * Sets the value of the 'calculation' field.
-      * @param value The value of 'calculation'.
+      * Sets the value of the 'calculationId' field.
+      * @param value The value of 'calculationId'.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder setCalculation(java.lang.CharSequence value) {
+    public carldata.hs.avro.RealTimeRecordAvro.Builder setCalculationId(java.lang.CharSequence value) {
       validate(fields()[1], value);
-      this.calculation = value;
+      this.calculationId = value;
       fieldSetFlags()[1] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'calculation' field has been set.
-      * @return True if the 'calculation' field has been set, false otherwise.
+      * Checks whether the 'calculationId' field has been set.
+      * @return True if the 'calculationId' field has been set, false otherwise.
       */
-    public boolean hasCalculation() {
+    public boolean hasCalculationId() {
       return fieldSetFlags()[1];
     }
 
 
     /**
-      * Clears the value of the 'calculation' field.
+      * Clears the value of the 'calculationId' field.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder clearCalculation() {
-      calculation = null;
+    public carldata.hs.avro.RealTimeRecordAvro.Builder clearCalculationId() {
+      calculationId = null;
       fieldSetFlags()[1] = false;
       return this;
     }
@@ -442,40 +442,40 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
     }
 
     /**
-      * Gets the value of the 'outputChannel' field.
+      * Gets the value of the 'outputChannelId' field.
       * @return The value.
       */
-    public java.lang.CharSequence getOutputChannel() {
-      return outputChannel;
+    public java.lang.CharSequence getOutputChannelId() {
+      return outputChannelId;
     }
 
     /**
-      * Sets the value of the 'outputChannel' field.
-      * @param value The value of 'outputChannel'.
+      * Sets the value of the 'outputChannelId' field.
+      * @param value The value of 'outputChannelId'.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder setOutputChannel(java.lang.CharSequence value) {
+    public carldata.hs.avro.RealTimeRecordAvro.Builder setOutputChannelId(java.lang.CharSequence value) {
       validate(fields()[4], value);
-      this.outputChannel = value;
+      this.outputChannelId = value;
       fieldSetFlags()[4] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'outputChannel' field has been set.
-      * @return True if the 'outputChannel' field has been set, false otherwise.
+      * Checks whether the 'outputChannelId' field has been set.
+      * @return True if the 'outputChannelId' field has been set, false otherwise.
       */
-    public boolean hasOutputChannel() {
+    public boolean hasOutputChannelId() {
       return fieldSetFlags()[4];
     }
 
 
     /**
-      * Clears the value of the 'outputChannel' field.
+      * Clears the value of the 'outputChannelId' field.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder clearOutputChannel() {
-      outputChannel = null;
+    public carldata.hs.avro.RealTimeRecordAvro.Builder clearOutputChannelId() {
+      outputChannelId = null;
       fieldSetFlags()[4] = false;
       return this;
     }
@@ -486,10 +486,10 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
       try {
         RealTimeRecordAvro record = new RealTimeRecordAvro();
         record.action = fieldSetFlags()[0] ? this.action : (carldata.hs.avro.RealTimeRecordActionAvro) defaultValue(fields()[0]);
-        record.calculation = fieldSetFlags()[1] ? this.calculation : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.calculationId = fieldSetFlags()[1] ? this.calculationId : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.script = fieldSetFlags()[2] ? this.script : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[2]);
         record.trigger = fieldSetFlags()[3] ? this.trigger : (java.lang.CharSequence) defaultValue(fields()[3]);
-        record.outputChannel = fieldSetFlags()[4] ? this.outputChannel : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.outputChannelId = fieldSetFlags()[4] ? this.outputChannelId : (java.lang.CharSequence) defaultValue(fields()[4]);
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

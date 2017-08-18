@@ -34,10 +34,10 @@ object RealTimeCheck extends Properties("RealTime") {
   property("AVRO") = forAll(realtimeRecordGen) { rec: RealTimeRecord =>
     val avro: RealTimeRecordAvro = new RealTimeRecordAvro(
       RealTimeRecordActionAvro.valueOf(rec.action.toString),
-      rec.calculation,
+      rec.calculationId,
       seqAsJavaList(rec.script.split("\n")),
       rec.trigger,
-      rec.outputChannel)
+      rec.outputChannelId)
     val avroStr = avro.toString
     avroStr.parseJson.convertTo[RealTimeRecord] == rec
   }

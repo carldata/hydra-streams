@@ -7,9 +7,9 @@
         "name": "RealTimeRecordActionAvro",
         "symbols" : ["AddAction", "RemoveAction", "UnknownAction"]
      }},
-     {"name": "calculation", "type": "string"},
+     {"name": "calculationId", "type": "string"},
      {"name": "script", "type": {"type": "array", "items": "string"}},
      {"name": "trigger", "type": "string"},
-     {"name": "outputChannel", "type": "string"}
+     {"name": "outputChannelId", "type": "string"}
  ]
 }

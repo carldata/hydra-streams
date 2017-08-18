@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 4155565917091095276L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DataAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"channel\",\"type\":\"string\"},{\"name\":\"timestamp\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"float\"}]}");
+  private static final long serialVersionUID = 6890670025258633711L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DataAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"channelId\",\"type\":\"string\"},{\"name\":\"timestamp\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"float\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -51,7 +51,7 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
     return DECODER.decode(b);
   }
 
-  @Deprecated public java.lang.CharSequence channel;
+  @Deprecated public java.lang.CharSequence channelId;
   @Deprecated public java.lang.CharSequence timestamp;
   @Deprecated public float value;
 
@@ -64,12 +64,12 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
 
   /**
    * All-args constructor.
-   * @param channel The new value for channel
+   * @param channelId The new value for channelId
    * @param timestamp The new value for timestamp
    * @param value The new value for value
    */
-  public DataAvro(java.lang.CharSequence channel, java.lang.CharSequence timestamp, java.lang.Float value) {
-    this.channel = channel;
+  public DataAvro(java.lang.CharSequence channelId, java.lang.CharSequence timestamp, java.lang.Float value) {
+    this.channelId = channelId;
     this.timestamp = timestamp;
     this.value = value;
   }
@@ -78,7 +78,7 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return channel;
+    case 0: return channelId;
     case 1: return timestamp;
     case 2: return value;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
@@ -89,7 +89,7 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: channel = (java.lang.CharSequence)value$; break;
+    case 0: channelId = (java.lang.CharSequence)value$; break;
     case 1: timestamp = (java.lang.CharSequence)value$; break;
     case 2: value = (java.lang.Float)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
@@ -97,19 +97,19 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
   }
 
   /**
-   * Gets the value of the 'channel' field.
-   * @return The value of the 'channel' field.
+   * Gets the value of the 'channelId' field.
+   * @return The value of the 'channelId' field.
    */
-  public java.lang.CharSequence getChannel() {
-    return channel;
+  public java.lang.CharSequence getChannelId() {
+    return channelId;
   }
 
   /**
-   * Sets the value of the 'channel' field.
+   * Sets the value of the 'channelId' field.
    * @param value the value to set.
    */
-  public void setChannel(java.lang.CharSequence value) {
-    this.channel = value;
+  public void setChannelId(java.lang.CharSequence value) {
+    this.channelId = value;
   }
 
   /**
@@ -176,7 +176,7 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<DataAvro>
     implements org.apache.avro.data.RecordBuilder<DataAvro> {
 
-    private java.lang.CharSequence channel;
+    private java.lang.CharSequence channelId;
     private java.lang.CharSequence timestamp;
     private float value;
 
@@ -191,8 +191,8 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
      */
     private Builder(carldata.hs.avro.DataAvro.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.channel)) {
-        this.channel = data().deepCopy(fields()[0].schema(), other.channel);
+      if (isValidValue(fields()[0], other.channelId)) {
+        this.channelId = data().deepCopy(fields()[0].schema(), other.channelId);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.timestamp)) {
@@ -211,8 +211,8 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
      */
     private Builder(carldata.hs.avro.DataAvro other) {
             super(SCHEMA$);
-      if (isValidValue(fields()[0], other.channel)) {
-        this.channel = data().deepCopy(fields()[0].schema(), other.channel);
+      if (isValidValue(fields()[0], other.channelId)) {
+        this.channelId = data().deepCopy(fields()[0].schema(), other.channelId);
         fieldSetFlags()[0] = true;
       }
       if (isValidValue(fields()[1], other.timestamp)) {
@@ -226,40 +226,40 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
     }
 
     /**
-      * Gets the value of the 'channel' field.
+      * Gets the value of the 'channelId' field.
       * @return The value.
       */
-    public java.lang.CharSequence getChannel() {
-      return channel;
+    public java.lang.CharSequence getChannelId() {
+      return channelId;
     }
 
     /**
-      * Sets the value of the 'channel' field.
-      * @param value The value of 'channel'.
+      * Sets the value of the 'channelId' field.
+      * @param value The value of 'channelId'.
       * @return This builder.
       */
-    public carldata.hs.avro.DataAvro.Builder setChannel(java.lang.CharSequence value) {
+    public carldata.hs.avro.DataAvro.Builder setChannelId(java.lang.CharSequence value) {
       validate(fields()[0], value);
-      this.channel = value;
+      this.channelId = value;
       fieldSetFlags()[0] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'channel' field has been set.
-      * @return True if the 'channel' field has been set, false otherwise.
+      * Checks whether the 'channelId' field has been set.
+      * @return True if the 'channelId' field has been set, false otherwise.
       */
-    public boolean hasChannel() {
+    public boolean hasChannelId() {
       return fieldSetFlags()[0];
     }
 
 
     /**
-      * Clears the value of the 'channel' field.
+      * Clears the value of the 'channelId' field.
       * @return This builder.
       */
-    public carldata.hs.avro.DataAvro.Builder clearChannel() {
-      channel = null;
+    public carldata.hs.avro.DataAvro.Builder clearChannelId() {
+      channelId = null;
       fieldSetFlags()[0] = false;
       return this;
     }
@@ -346,7 +346,7 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
     public DataAvro build() {
       try {
         DataAvro record = new DataAvro();
-        record.channel = fieldSetFlags()[0] ? this.channel : (java.lang.CharSequence) defaultValue(fields()[0]);
+        record.channelId = fieldSetFlags()[0] ? this.channelId : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.timestamp = fieldSetFlags()[1] ? this.timestamp : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.value = fieldSetFlags()[2] ? this.value : (java.lang.Float) defaultValue(fields()[2]);
         return record;
