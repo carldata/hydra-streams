@@ -13,7 +13,7 @@ object RealTime {
 
   case object UnknownAction extends Action
 
-  case class RealTimeRecord(action: Action, calculation: String, script: String, trigger: String, outputChannel: String)
+  case class RealTimeRecord(action: Action, calculationId: String, script: String, trigger: String, outputChannelId: String)
 
   object RealTimeJsonProtocol extends DefaultJsonProtocol {
 
@@ -25,10 +25,10 @@ object RealTime {
             case RemoveAction => "action" -> JsString("RemoveAction")
             case UnknownAction => "action" -> JsString("")
           },
-          "calculation" -> JsString(r.calculation),
+          "calculationId" -> JsString(r.calculationId),
           "script" -> JsArray(r.script.split("\n").map(JsString.apply).toVector),
           "trigger" -> JsString(r.trigger),
-          "outputChannel" -> JsString(r.outputChannel)
+          "outputChannelId" -> JsString(r.outputChannelId)
         )
 
       def read(value: JsValue): RealTimeRecord = value match {
@@ -38,10 +38,10 @@ object RealTime {
             case JsString("RemoveAction") => RemoveAction
             case _ => UnknownAction
           }.getOrElse(UnknownAction)
-          val calculation: String = fs.get("calculation").map(stringFromValue).getOrElse("")
+          val calculation: String = fs.get("calculationId").map(stringFromValue).getOrElse("")
           val script: String = fs.get("script").map(textFromLines).getOrElse("")
           val trigger: String = fs.get("trigger").map(stringFromValue).getOrElse("")
-          val outputChannel: String = fs.get("outputChannel").map(stringFromValue).getOrElse("")
+          val outputChannel: String = fs.get("outputChannelId").map(stringFromValue).getOrElse("")
           RealTimeRecord(action, calculation, script, trigger, outputChannel)
         case _ => RealTimeRecord(UnknownAction, "json-format-error", "", "", "")
       }
