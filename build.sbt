@@ -1,6 +1,6 @@
 name := "hydra-streams"
 
-version := "0.2.0"
+version := "0.3.1"
 
 organization := "io.github.carldata"
 
