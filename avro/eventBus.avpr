@@ -6,7 +6,7 @@
      {"name": "status", "type": {
         "type": "enum",
         "name": "EventBusRecordStatusAvro",
-        "symbols" : ["BatchCalculationStarted", "BatchCalculationStopped", "Unkown"]
+        "symbols" : ["BatchCalculationStarted", "BatchCalculationStopped", "Unknown"]
      }}
  ]
 }
