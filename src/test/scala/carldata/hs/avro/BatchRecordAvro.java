@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class BatchRecordAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 257575359675080661L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BatchRecordAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"calculationId\",\"type\":\"string\"},{\"name\":\"script\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"inputChannelId\",\"type\":\"string\"},{\"name\":\"outputChannelId\",\"type\":\"string\"},{\"name\":\"startDate\",\"type\":\"string\"},{\"name\":\"endDate\",\"type\":\"string\"}]}");
+  private static final long serialVersionUID = -6366032998461211578L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"BatchRecordAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"calculationId\",\"type\":\"string\"},{\"name\":\"script\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"inputChannelIds\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"outputChannelId\",\"type\":\"string\"},{\"name\":\"startDate\",\"type\":\"string\"},{\"name\":\"endDate\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -53,7 +53,7 @@ public class BatchRecordAvro extends org.apache.avro.specific.SpecificRecordBase
 
   @Deprecated public java.lang.CharSequence calculationId;
   @Deprecated public java.util.List<java.lang.CharSequence> script;
-  @Deprecated public java.lang.CharSequence inputChannelId;
+  @Deprecated public java.util.List<java.lang.CharSequence> inputChannelIds;
   @Deprecated public java.lang.CharSequence outputChannelId;
   @Deprecated public java.lang.CharSequence startDate;
   @Deprecated public java.lang.CharSequence endDate;
@@ -69,15 +69,15 @@ public class BatchRecordAvro extends org.apache.avro.specific.SpecificRecordBase
    * All-args constructor.
    * @param calculationId The new value for calculationId
    * @param script The new value for script
-   * @param inputChannelId The new value for inputChannelId
+   * @param inputChannelIds The new value for inputChannelIds
    * @param outputChannelId The new value for outputChannelId
    * @param startDate The new value for startDate
    * @param endDate The new value for endDate
    */
-  public BatchRecordAvro(java.lang.CharSequence calculationId, java.util.List<java.lang.CharSequence> script, java.lang.CharSequence inputChannelId, java.lang.CharSequence outputChannelId, java.lang.CharSequence startDate, java.lang.CharSequence endDate) {
+  public BatchRecordAvro(java.lang.CharSequence calculationId, java.util.List<java.lang.CharSequence> script, java.util.List<java.lang.CharSequence> inputChannelIds, java.lang.CharSequence outputChannelId, java.lang.CharSequence startDate, java.lang.CharSequence endDate) {
     this.calculationId = calculationId;
     this.script = script;
-    this.inputChannelId = inputChannelId;
+    this.inputChannelIds = inputChannelIds;
     this.outputChannelId = outputChannelId;
     this.startDate = startDate;
     this.endDate = endDate;
@@ -89,7 +89,7 @@ public class BatchRecordAvro extends org.apache.avro.specific.SpecificRecordBase
     switch (field$) {
     case 0: return calculationId;
     case 1: return script;
-    case 2: return inputChannelId;
+    case 2: return inputChannelIds;
     case 3: return outputChannelId;
     case 4: return startDate;
     case 5: return endDate;
@@ -103,7 +103,7 @@ public class BatchRecordAvro extends org.apache.avro.specific.SpecificRecordBase
     switch (field$) {
     case 0: calculationId = (java.lang.CharSequence)value$; break;
     case 1: script = (java.util.List<java.lang.CharSequence>)value$; break;
-    case 2: inputChannelId = (java.lang.CharSequence)value$; break;
+    case 2: inputChannelIds = (java.util.List<java.lang.CharSequence>)value$; break;
     case 3: outputChannelId = (java.lang.CharSequence)value$; break;
     case 4: startDate = (java.lang.CharSequence)value$; break;
     case 5: endDate = (java.lang.CharSequence)value$; break;
@@ -144,19 +144,19 @@ public class BatchRecordAvro extends org.apache.avro.specific.SpecificRecordBase
   }
 
   /**
-   * Gets the value of the 'inputChannelId' field.
-   * @return The value of the 'inputChannelId' field.
+   * Gets the value of the 'inputChannelIds' field.
+   * @return The value of the 'inputChannelIds' field.
    */
-  public java.lang.CharSequence getInputChannelId() {
-    return inputChannelId;
+  public java.util.List<java.lang.CharSequence> getInputChannelIds() {
+    return inputChannelIds;
   }
 
   /**
-   * Sets the value of the 'inputChannelId' field.
+   * Sets the value of the 'inputChannelIds' field.
    * @param value the value to set.
    */
-  public void setInputChannelId(java.lang.CharSequence value) {
-    this.inputChannelId = value;
+  public void setInputChannelIds(java.util.List<java.lang.CharSequence> value) {
+    this.inputChannelIds = value;
   }
 
   /**
@@ -241,7 +241,7 @@ public class BatchRecordAvro extends org.apache.avro.specific.SpecificRecordBase
 
     private java.lang.CharSequence calculationId;
     private java.util.List<java.lang.CharSequence> script;
-    private java.lang.CharSequence inputChannelId;
+    private java.util.List<java.lang.CharSequence> inputChannelIds;
     private java.lang.CharSequence outputChannelId;
     private java.lang.CharSequence startDate;
     private java.lang.CharSequence endDate;
@@ -265,8 +265,8 @@ public class BatchRecordAvro extends org.apache.avro.specific.SpecificRecordBase
         this.script = data().deepCopy(fields()[1].schema(), other.script);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.inputChannelId)) {
-        this.inputChannelId = data().deepCopy(fields()[2].schema(), other.inputChannelId);
+      if (isValidValue(fields()[2], other.inputChannelIds)) {
+        this.inputChannelIds = data().deepCopy(fields()[2].schema(), other.inputChannelIds);
         fieldSetFlags()[2] = true;
       }
       if (isValidValue(fields()[3], other.outputChannelId)) {
@@ -297,8 +297,8 @@ public class BatchRecordAvro extends org.apache.avro.specific.SpecificRecordBase
         this.script = data().deepCopy(fields()[1].schema(), other.script);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.inputChannelId)) {
-        this.inputChannelId = data().deepCopy(fields()[2].schema(), other.inputChannelId);
+      if (isValidValue(fields()[2], other.inputChannelIds)) {
+        this.inputChannelIds = data().deepCopy(fields()[2].schema(), other.inputChannelIds);
         fieldSetFlags()[2] = true;
       }
       if (isValidValue(fields()[3], other.outputChannelId)) {
@@ -394,40 +394,40 @@ public class BatchRecordAvro extends org.apache.avro.specific.SpecificRecordBase
     }
 
     /**
-      * Gets the value of the 'inputChannelId' field.
+      * Gets the value of the 'inputChannelIds' field.
       * @return The value.
       */
-    public java.lang.CharSequence getInputChannelId() {
-      return inputChannelId;
+    public java.util.List<java.lang.CharSequence> getInputChannelIds() {
+      return inputChannelIds;
     }
 
     /**
-      * Sets the value of the 'inputChannelId' field.
-      * @param value The value of 'inputChannelId'.
+      * Sets the value of the 'inputChannelIds' field.
+      * @param value The value of 'inputChannelIds'.
       * @return This builder.
       */
-    public carldata.hs.avro.BatchRecordAvro.Builder setInputChannelId(java.lang.CharSequence value) {
+    public carldata.hs.avro.BatchRecordAvro.Builder setInputChannelIds(java.util.List<java.lang.CharSequence> value) {
       validate(fields()[2], value);
-      this.inputChannelId = value;
+      this.inputChannelIds = value;
       fieldSetFlags()[2] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'inputChannelId' field has been set.
-      * @return True if the 'inputChannelId' field has been set, false otherwise.
+      * Checks whether the 'inputChannelIds' field has been set.
+      * @return True if the 'inputChannelIds' field has been set, false otherwise.
       */
-    public boolean hasInputChannelId() {
+    public boolean hasInputChannelIds() {
       return fieldSetFlags()[2];
     }
 
 
     /**
-      * Clears the value of the 'inputChannelId' field.
+      * Clears the value of the 'inputChannelIds' field.
       * @return This builder.
       */
-    public carldata.hs.avro.BatchRecordAvro.Builder clearInputChannelId() {
-      inputChannelId = null;
+    public carldata.hs.avro.BatchRecordAvro.Builder clearInputChannelIds() {
+      inputChannelIds = null;
       fieldSetFlags()[2] = false;
       return this;
     }
@@ -556,7 +556,7 @@ public class BatchRecordAvro extends org.apache.avro.specific.SpecificRecordBase
         BatchRecordAvro record = new BatchRecordAvro();
         record.calculationId = fieldSetFlags()[0] ? this.calculationId : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.script = fieldSetFlags()[1] ? this.script : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[1]);
-        record.inputChannelId = fieldSetFlags()[2] ? this.inputChannelId : (java.lang.CharSequence) defaultValue(fields()[2]);
+        record.inputChannelIds = fieldSetFlags()[2] ? this.inputChannelIds : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[2]);
         record.outputChannelId = fieldSetFlags()[3] ? this.outputChannelId : (java.lang.CharSequence) defaultValue(fields()[3]);
         record.startDate = fieldSetFlags()[4] ? this.startDate : (java.lang.CharSequence) defaultValue(fields()[4]);
         record.endDate = fieldSetFlags()[5] ? this.endDate : (java.lang.CharSequence) defaultValue(fields()[5]);

@@ -36,4 +36,9 @@ object JsonConverters {
     case _ => ""
   }
 
+  def arrayFromValue(jsVal: JsValue): Seq[String] = jsVal match {
+    case JsArray(vs) => vs.map(stringFromValue)
+    case _ => Seq()
+  }
+
 }
