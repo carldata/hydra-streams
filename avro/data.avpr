@@ -4,6 +4,6 @@
  "fields": [
      {"name": "channelId", "type": "string"},
      {"name": "timestamp",  "type": "string"},
-     {"name": "value", "type": "float"}
+     {"name": "value", "type": ["null", "float"]}
  ]
 }
