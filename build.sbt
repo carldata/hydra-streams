@@ -1,6 +1,6 @@
 name := "hydra-streams"
 
-version := "0.4.0"
+version := "0.4.1"
 
 organization := "io.github.carldata"
 
@@ -28,6 +28,14 @@ scmInfo := Some(
     "scm:git@github.com:carldata/hydra-streams.git"
   )
 )
+
+publishTo := {
+  val nexus = "https://oss.sonatype.org/"
+  if (isSnapshot.value)
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+}
 
 developers := List(
   Developer(
