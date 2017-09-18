@@ -63,4 +63,9 @@ object JsonConverters {
     LocalDateTime.parse(str, formatter)
   }
 
+  def arrayFromValue(jsVal: JsValue): Seq[String] = jsVal match {
+    case JsArray(vs) => vs.map(stringFromValue)
+    case _ => Seq()
+  }
+
 }

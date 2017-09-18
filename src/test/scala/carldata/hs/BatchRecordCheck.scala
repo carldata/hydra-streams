@@ -20,7 +20,7 @@ object BatchRecordCheck extends Properties("Batch")  {
   private val batchRecordGen = for {
     calculationId <- Gen.identifier
     script <- genScript
-    inputChannelId <- Gen.identifier
+    inputChannelId <- Gen.listOf(Gen.identifier)
     outputChannelId <- Gen.identifier
   } yield BatchRecord(calculationId, script, inputChannelId, outputChannelId, LocalDateTime.now(), LocalDateTime.now())
 
@@ -35,7 +35,7 @@ object BatchRecordCheck extends Properties("Batch")  {
     val avro: BatchRecordAvro = new BatchRecordAvro(
       rec.calculationId,
       seqAsJavaList(rec.script.split("\n")),
-      rec.inputChannelId,
+      seqAsJavaList(rec.inputChannelIds),
       rec.outputChannelId,
       rec.startDate.toString,
       rec.endDate.toString)

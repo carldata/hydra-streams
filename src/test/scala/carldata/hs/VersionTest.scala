@@ -55,13 +55,13 @@ class VersionTest extends FlatSpec with Matchers {
       """
         |{"calculationId": "CId",
         |"script": ["line1", "line2"],
-        |"inputChannelId": "IcId",
+        |"inputChannelIds": ["IcId", "in2"],
         |"outputChannelId" : "OcId",
         |"startDate" : "2015-01-01T00:00:00",
         |"endDate": "2015-01-01T00:00:00" }
       """.stripMargin
     val rec = JsonParser(source).convertTo[BatchRecord]
-    rec shouldBe BatchRecord("CId", List("line1", "line2").mkString("\n"), "IcId", "OcId",
+    rec shouldBe BatchRecord("CId", List("line1", "line2").mkString("\n"), List("IcId", "in2"), "OcId",
       LocalDateTime.of(2015, 1, 1, 0, 0, 0), LocalDateTime.of(2015, 1, 1, 0, 0, 0))
   }
 
@@ -70,13 +70,13 @@ class VersionTest extends FlatSpec with Matchers {
       """
         |{"calculationId": "CId",
         |"script": ["line1", "line2"],
-        |"inputChannelId": "IcId",
+        |"inputChannelIds": ["IcId"],
         |"outputChannelId" : "OcId",
         |"startDate" : "2015-01-01",
         |"endDate": "2015-01-12" }
       """.stripMargin
     val rec = JsonParser(source).convertTo[BatchRecord]
-    rec shouldBe BatchRecord("CId", List("line1", "line2").mkString("\n"), "IcId", "OcId",
+    rec shouldBe BatchRecord("CId", List("line1", "line2").mkString("\n"), List("IcId"), "OcId",
       LocalDateTime.of(2015, 1, 1, 0, 0, 0), LocalDateTime.of(2015, 1, 12, 0, 0, 0))
   }
 
