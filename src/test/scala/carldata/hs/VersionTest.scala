@@ -65,4 +65,19 @@ class VersionTest extends FlatSpec with Matchers {
       LocalDateTime.of(2015, 1, 1, 0, 0, 0), LocalDateTime.of(2015, 1, 1, 0, 0, 0))
   }
 
+  "BatchRecord" should "parse json with date only" in {
+    val source =
+      """
+        |{"calculationId": "CId",
+        |"script": ["line1", "line2"],
+        |"inputChannelIds": ["IcId"],
+        |"outputChannelId" : "OcId",
+        |"startDate" : "2015-01-01",
+        |"endDate": "2015-01-12" }
+      """.stripMargin
+    val rec = JsonParser(source).convertTo[BatchRecord]
+    rec shouldBe BatchRecord("CId", List("line1", "line2").mkString("\n"), List("IcId"), "OcId",
+      LocalDateTime.of(2015, 1, 1, 0, 0, 0), LocalDateTime.of(2015, 1, 12, 0, 0, 0))
+  }
+
 }
