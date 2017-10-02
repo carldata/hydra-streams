@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 6890670025258633711L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DataAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"channelId\",\"type\":\"string\"},{\"name\":\"timestamp\",\"type\":\"string\"},{\"name\":\"value\",\"type\":\"float\"}]}");
+  private static final long serialVersionUID = -4531148194708754859L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"DataAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"channelId\",\"type\":\"string\"},{\"name\":\"timestamp\",\"type\":\"string\"},{\"name\":\"value\",\"type\":[\"null\",\"float\"]}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -53,7 +53,7 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
 
   @Deprecated public java.lang.CharSequence channelId;
   @Deprecated public java.lang.CharSequence timestamp;
-  @Deprecated public float value;
+  @Deprecated public java.lang.Float value;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -178,7 +178,7 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
 
     private java.lang.CharSequence channelId;
     private java.lang.CharSequence timestamp;
-    private float value;
+    private java.lang.Float value;
 
     /** Creates a new Builder */
     private Builder() {
@@ -316,7 +316,7 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
       * @param value The value of 'value'.
       * @return This builder.
       */
-    public carldata.hs.avro.DataAvro.Builder setValue(float value) {
+    public carldata.hs.avro.DataAvro.Builder setValue(java.lang.Float value) {
       validate(fields()[2], value);
       this.value = value;
       fieldSetFlags()[2] = true;
@@ -337,6 +337,7 @@ public class DataAvro extends org.apache.avro.specific.SpecificRecordBase implem
       * @return This builder.
       */
     public carldata.hs.avro.DataAvro.Builder clearValue() {
+      value = null;
       fieldSetFlags()[2] = false;
       return this;
     }

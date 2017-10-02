@@ -27,6 +27,15 @@ class VersionTest extends FlatSpec with Matchers {
     rec shouldBe DataRecord("A", LocalDateTime.of(2015, 1, 1, 0, 0, 0), 100)
   }
 
+  it should "parse null value" in {
+    val source =
+      """
+        |{"channelId": "A", "timestamp": "2015-01-01T00:00:00", "value": null}
+      """.stripMargin
+    val rec = JsonParser(source).convertTo[DataRecord]
+    rec.value.isNaN shouldBe true
+  }
+
   "RealTimeRecord" should "parse json version 1" in {
     val source =
       """

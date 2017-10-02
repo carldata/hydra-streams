@@ -25,9 +25,9 @@ object Data {
         case JsObject(fs) =>
           val channel: String = fs.get("channelId").map(stringFromValue).getOrElse("")
           val ts: LocalDateTime = fs.get("timestamp").map(timestampFromValue).getOrElse(LocalDateTime.now())
-          val v: Float = fs.get("value").map(floatFromValue).getOrElse(0f)
+          val v: Float = fs.get("value").map(floatFromValue).getOrElse(Float.NaN)
           DataRecord(channel, ts, v)
-        case _ => DataRecord("json-format-error", LocalDateTime.now(), 0f)
+        case _ => DataRecord("json-format-error", LocalDateTime.now(), Float.NaN)
       }
     }
   }

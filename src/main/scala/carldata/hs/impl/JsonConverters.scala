@@ -29,7 +29,7 @@ object JsonConverters {
 
   def floatFromValue(jsVal: JsValue): Float = jsVal match {
     case JsNumber(v) => v.toFloat
-    case _ => 0f
+    case _ => Float.NaN
   }
 
   def textFromLines(jsVal: JsValue): String = jsVal match {
