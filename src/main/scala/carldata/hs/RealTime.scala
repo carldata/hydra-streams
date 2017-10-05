@@ -1,7 +1,7 @@
 package carldata.hs
 
-import spray.json.{DefaultJsonProtocol, JsArray, JsNumber, JsObject, JsString, JsValue, RootJsonFormat}
 import carldata.hs.impl.JsonConverters._
+import spray.json.{DefaultJsonProtocol, JsArray, JsObject, JsString, JsValue, RootJsonFormat}
 
 object RealTime {
 

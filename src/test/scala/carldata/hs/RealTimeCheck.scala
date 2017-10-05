@@ -2,7 +2,7 @@ package carldata.hs
 
 import carldata.hs.RealTime.RealTimeJsonProtocol._
 import carldata.hs.RealTime.{AddAction, RealTimeJobRecord, RemoveAction}
-import carldata.hs.avro.{RealTimeJobAvro, RealTimeRecordActionAvro}
+import carldata.hs.avro.RealTimeJobAvro
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Gen, Properties}
 import spray.json._
