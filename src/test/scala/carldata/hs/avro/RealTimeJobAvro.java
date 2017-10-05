@@ -12,23 +12,23 @@ import org.apache.avro.message.SchemaStore;
 
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
-public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -6027129808311582605L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RealTimeRecordAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"action\",\"type\":{\"type\":\"enum\",\"name\":\"RealTimeRecordActionAvro\",\"symbols\":[\"AddAction\",\"RemoveAction\",\"UnknownAction\"]}},{\"name\":\"calculationId\",\"type\":\"string\"},{\"name\":\"script\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"trigger\",\"type\":\"string\"},{\"name\":\"outputChannelId\",\"type\":\"string\"}]}");
+public class RealTimeJobAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
+  private static final long serialVersionUID = -1033120010213913818L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RealTimeJobAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"action\",\"type\":\"string\"},{\"name\":\"calculationId\",\"type\":\"string\"},{\"name\":\"script\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"inputChannelIds\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"outputChannelId\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
 
-  private static final BinaryMessageEncoder<RealTimeRecordAvro> ENCODER =
-      new BinaryMessageEncoder<RealTimeRecordAvro>(MODEL$, SCHEMA$);
+  private static final BinaryMessageEncoder<RealTimeJobAvro> ENCODER =
+      new BinaryMessageEncoder<RealTimeJobAvro>(MODEL$, SCHEMA$);
 
-  private static final BinaryMessageDecoder<RealTimeRecordAvro> DECODER =
-      new BinaryMessageDecoder<RealTimeRecordAvro>(MODEL$, SCHEMA$);
+  private static final BinaryMessageDecoder<RealTimeJobAvro> DECODER =
+      new BinaryMessageDecoder<RealTimeJobAvro>(MODEL$, SCHEMA$);
 
   /**
    * Return the BinaryMessageDecoder instance used by this class.
    */
-  public static BinaryMessageDecoder<RealTimeRecordAvro> getDecoder() {
+  public static BinaryMessageDecoder<RealTimeJobAvro> getDecoder() {
     return DECODER;
   }
 
@@ -36,25 +36,25 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
    * Create a new BinaryMessageDecoder instance for this class that uses the specified {@link SchemaStore}.
    * @param resolver a {@link SchemaStore} used to find schemas by fingerprint
    */
-  public static BinaryMessageDecoder<RealTimeRecordAvro> createDecoder(SchemaStore resolver) {
-    return new BinaryMessageDecoder<RealTimeRecordAvro>(MODEL$, SCHEMA$, resolver);
+  public static BinaryMessageDecoder<RealTimeJobAvro> createDecoder(SchemaStore resolver) {
+    return new BinaryMessageDecoder<RealTimeJobAvro>(MODEL$, SCHEMA$, resolver);
   }
 
-  /** Serializes this RealTimeRecordAvro to a ByteBuffer. */
+  /** Serializes this RealTimeJobAvro to a ByteBuffer. */
   public java.nio.ByteBuffer toByteBuffer() throws java.io.IOException {
     return ENCODER.encode(this);
   }
 
-  /** Deserializes a RealTimeRecordAvro from a ByteBuffer. */
-  public static RealTimeRecordAvro fromByteBuffer(
+  /** Deserializes a RealTimeJobAvro from a ByteBuffer. */
+  public static RealTimeJobAvro fromByteBuffer(
       java.nio.ByteBuffer b) throws java.io.IOException {
     return DECODER.decode(b);
   }
 
-  @Deprecated public carldata.hs.avro.RealTimeRecordActionAvro action;
+  @Deprecated public java.lang.CharSequence action;
   @Deprecated public java.lang.CharSequence calculationId;
   @Deprecated public java.util.List<java.lang.CharSequence> script;
-  @Deprecated public java.lang.CharSequence trigger;
+  @Deprecated public java.util.List<java.lang.CharSequence> inputChannelIds;
   @Deprecated public java.lang.CharSequence outputChannelId;
 
   /**
@@ -62,21 +62,21 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
    * to their default values from the schema.  If that is desired then
    * one should use <code>newBuilder()</code>.
    */
-  public RealTimeRecordAvro() {}
+  public RealTimeJobAvro() {}
 
   /**
    * All-args constructor.
    * @param action The new value for action
    * @param calculationId The new value for calculationId
    * @param script The new value for script
-   * @param trigger The new value for trigger
+   * @param inputChannelIds The new value for inputChannelIds
    * @param outputChannelId The new value for outputChannelId
    */
-  public RealTimeRecordAvro(carldata.hs.avro.RealTimeRecordActionAvro action, java.lang.CharSequence calculationId, java.util.List<java.lang.CharSequence> script, java.lang.CharSequence trigger, java.lang.CharSequence outputChannelId) {
+  public RealTimeJobAvro(java.lang.CharSequence action, java.lang.CharSequence calculationId, java.util.List<java.lang.CharSequence> script, java.util.List<java.lang.CharSequence> inputChannelIds, java.lang.CharSequence outputChannelId) {
     this.action = action;
     this.calculationId = calculationId;
     this.script = script;
-    this.trigger = trigger;
+    this.inputChannelIds = inputChannelIds;
     this.outputChannelId = outputChannelId;
   }
 
@@ -87,7 +87,7 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
     case 0: return action;
     case 1: return calculationId;
     case 2: return script;
-    case 3: return trigger;
+    case 3: return inputChannelIds;
     case 4: return outputChannelId;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
@@ -97,10 +97,10 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: action = (carldata.hs.avro.RealTimeRecordActionAvro)value$; break;
+    case 0: action = (java.lang.CharSequence)value$; break;
     case 1: calculationId = (java.lang.CharSequence)value$; break;
     case 2: script = (java.util.List<java.lang.CharSequence>)value$; break;
-    case 3: trigger = (java.lang.CharSequence)value$; break;
+    case 3: inputChannelIds = (java.util.List<java.lang.CharSequence>)value$; break;
     case 4: outputChannelId = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
@@ -110,7 +110,7 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
    * Gets the value of the 'action' field.
    * @return The value of the 'action' field.
    */
-  public carldata.hs.avro.RealTimeRecordActionAvro getAction() {
+  public java.lang.CharSequence getAction() {
     return action;
   }
 
@@ -118,7 +118,7 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
    * Sets the value of the 'action' field.
    * @param value the value to set.
    */
-  public void setAction(carldata.hs.avro.RealTimeRecordActionAvro value) {
+  public void setAction(java.lang.CharSequence value) {
     this.action = value;
   }
 
@@ -155,19 +155,19 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
   }
 
   /**
-   * Gets the value of the 'trigger' field.
-   * @return The value of the 'trigger' field.
+   * Gets the value of the 'inputChannelIds' field.
+   * @return The value of the 'inputChannelIds' field.
    */
-  public java.lang.CharSequence getTrigger() {
-    return trigger;
+  public java.util.List<java.lang.CharSequence> getInputChannelIds() {
+    return inputChannelIds;
   }
 
   /**
-   * Sets the value of the 'trigger' field.
+   * Sets the value of the 'inputChannelIds' field.
    * @param value the value to set.
    */
-  public void setTrigger(java.lang.CharSequence value) {
-    this.trigger = value;
+  public void setInputChannelIds(java.util.List<java.lang.CharSequence> value) {
+    this.inputChannelIds = value;
   }
 
   /**
@@ -187,41 +187,41 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
   }
 
   /**
-   * Creates a new RealTimeRecordAvro RecordBuilder.
-   * @return A new RealTimeRecordAvro RecordBuilder
+   * Creates a new RealTimeJobAvro RecordBuilder.
+   * @return A new RealTimeJobAvro RecordBuilder
    */
-  public static carldata.hs.avro.RealTimeRecordAvro.Builder newBuilder() {
-    return new carldata.hs.avro.RealTimeRecordAvro.Builder();
+  public static carldata.hs.avro.RealTimeJobAvro.Builder newBuilder() {
+    return new carldata.hs.avro.RealTimeJobAvro.Builder();
   }
 
   /**
-   * Creates a new RealTimeRecordAvro RecordBuilder by copying an existing Builder.
+   * Creates a new RealTimeJobAvro RecordBuilder by copying an existing Builder.
    * @param other The existing builder to copy.
-   * @return A new RealTimeRecordAvro RecordBuilder
+   * @return A new RealTimeJobAvro RecordBuilder
    */
-  public static carldata.hs.avro.RealTimeRecordAvro.Builder newBuilder(carldata.hs.avro.RealTimeRecordAvro.Builder other) {
-    return new carldata.hs.avro.RealTimeRecordAvro.Builder(other);
+  public static carldata.hs.avro.RealTimeJobAvro.Builder newBuilder(carldata.hs.avro.RealTimeJobAvro.Builder other) {
+    return new carldata.hs.avro.RealTimeJobAvro.Builder(other);
   }
 
   /**
-   * Creates a new RealTimeRecordAvro RecordBuilder by copying an existing RealTimeRecordAvro instance.
+   * Creates a new RealTimeJobAvro RecordBuilder by copying an existing RealTimeJobAvro instance.
    * @param other The existing instance to copy.
-   * @return A new RealTimeRecordAvro RecordBuilder
+   * @return A new RealTimeJobAvro RecordBuilder
    */
-  public static carldata.hs.avro.RealTimeRecordAvro.Builder newBuilder(carldata.hs.avro.RealTimeRecordAvro other) {
-    return new carldata.hs.avro.RealTimeRecordAvro.Builder(other);
+  public static carldata.hs.avro.RealTimeJobAvro.Builder newBuilder(carldata.hs.avro.RealTimeJobAvro other) {
+    return new carldata.hs.avro.RealTimeJobAvro.Builder(other);
   }
 
   /**
-   * RecordBuilder for RealTimeRecordAvro instances.
+   * RecordBuilder for RealTimeJobAvro instances.
    */
-  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<RealTimeRecordAvro>
-    implements org.apache.avro.data.RecordBuilder<RealTimeRecordAvro> {
+  public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<RealTimeJobAvro>
+    implements org.apache.avro.data.RecordBuilder<RealTimeJobAvro> {
 
-    private carldata.hs.avro.RealTimeRecordActionAvro action;
+    private java.lang.CharSequence action;
     private java.lang.CharSequence calculationId;
     private java.util.List<java.lang.CharSequence> script;
-    private java.lang.CharSequence trigger;
+    private java.util.List<java.lang.CharSequence> inputChannelIds;
     private java.lang.CharSequence outputChannelId;
 
     /** Creates a new Builder */
@@ -233,7 +233,7 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
      * Creates a Builder by copying an existing Builder.
      * @param other The existing Builder to copy.
      */
-    private Builder(carldata.hs.avro.RealTimeRecordAvro.Builder other) {
+    private Builder(carldata.hs.avro.RealTimeJobAvro.Builder other) {
       super(other);
       if (isValidValue(fields()[0], other.action)) {
         this.action = data().deepCopy(fields()[0].schema(), other.action);
@@ -247,8 +247,8 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
         this.script = data().deepCopy(fields()[2].schema(), other.script);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.trigger)) {
-        this.trigger = data().deepCopy(fields()[3].schema(), other.trigger);
+      if (isValidValue(fields()[3], other.inputChannelIds)) {
+        this.inputChannelIds = data().deepCopy(fields()[3].schema(), other.inputChannelIds);
         fieldSetFlags()[3] = true;
       }
       if (isValidValue(fields()[4], other.outputChannelId)) {
@@ -258,10 +258,10 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
     }
 
     /**
-     * Creates a Builder by copying an existing RealTimeRecordAvro instance
+     * Creates a Builder by copying an existing RealTimeJobAvro instance
      * @param other The existing instance to copy.
      */
-    private Builder(carldata.hs.avro.RealTimeRecordAvro other) {
+    private Builder(carldata.hs.avro.RealTimeJobAvro other) {
             super(SCHEMA$);
       if (isValidValue(fields()[0], other.action)) {
         this.action = data().deepCopy(fields()[0].schema(), other.action);
@@ -275,8 +275,8 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
         this.script = data().deepCopy(fields()[2].schema(), other.script);
         fieldSetFlags()[2] = true;
       }
-      if (isValidValue(fields()[3], other.trigger)) {
-        this.trigger = data().deepCopy(fields()[3].schema(), other.trigger);
+      if (isValidValue(fields()[3], other.inputChannelIds)) {
+        this.inputChannelIds = data().deepCopy(fields()[3].schema(), other.inputChannelIds);
         fieldSetFlags()[3] = true;
       }
       if (isValidValue(fields()[4], other.outputChannelId)) {
@@ -289,7 +289,7 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
       * Gets the value of the 'action' field.
       * @return The value.
       */
-    public carldata.hs.avro.RealTimeRecordActionAvro getAction() {
+    public java.lang.CharSequence getAction() {
       return action;
     }
 
@@ -298,7 +298,7 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
       * @param value The value of 'action'.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder setAction(carldata.hs.avro.RealTimeRecordActionAvro value) {
+    public carldata.hs.avro.RealTimeJobAvro.Builder setAction(java.lang.CharSequence value) {
       validate(fields()[0], value);
       this.action = value;
       fieldSetFlags()[0] = true;
@@ -318,7 +318,7 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
       * Clears the value of the 'action' field.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder clearAction() {
+    public carldata.hs.avro.RealTimeJobAvro.Builder clearAction() {
       action = null;
       fieldSetFlags()[0] = false;
       return this;
@@ -337,7 +337,7 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
       * @param value The value of 'calculationId'.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder setCalculationId(java.lang.CharSequence value) {
+    public carldata.hs.avro.RealTimeJobAvro.Builder setCalculationId(java.lang.CharSequence value) {
       validate(fields()[1], value);
       this.calculationId = value;
       fieldSetFlags()[1] = true;
@@ -357,7 +357,7 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
       * Clears the value of the 'calculationId' field.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder clearCalculationId() {
+    public carldata.hs.avro.RealTimeJobAvro.Builder clearCalculationId() {
       calculationId = null;
       fieldSetFlags()[1] = false;
       return this;
@@ -376,7 +376,7 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
       * @param value The value of 'script'.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder setScript(java.util.List<java.lang.CharSequence> value) {
+    public carldata.hs.avro.RealTimeJobAvro.Builder setScript(java.util.List<java.lang.CharSequence> value) {
       validate(fields()[2], value);
       this.script = value;
       fieldSetFlags()[2] = true;
@@ -396,47 +396,47 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
       * Clears the value of the 'script' field.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder clearScript() {
+    public carldata.hs.avro.RealTimeJobAvro.Builder clearScript() {
       script = null;
       fieldSetFlags()[2] = false;
       return this;
     }
 
     /**
-      * Gets the value of the 'trigger' field.
+      * Gets the value of the 'inputChannelIds' field.
       * @return The value.
       */
-    public java.lang.CharSequence getTrigger() {
-      return trigger;
+    public java.util.List<java.lang.CharSequence> getInputChannelIds() {
+      return inputChannelIds;
     }
 
     /**
-      * Sets the value of the 'trigger' field.
-      * @param value The value of 'trigger'.
+      * Sets the value of the 'inputChannelIds' field.
+      * @param value The value of 'inputChannelIds'.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder setTrigger(java.lang.CharSequence value) {
+    public carldata.hs.avro.RealTimeJobAvro.Builder setInputChannelIds(java.util.List<java.lang.CharSequence> value) {
       validate(fields()[3], value);
-      this.trigger = value;
+      this.inputChannelIds = value;
       fieldSetFlags()[3] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'trigger' field has been set.
-      * @return True if the 'trigger' field has been set, false otherwise.
+      * Checks whether the 'inputChannelIds' field has been set.
+      * @return True if the 'inputChannelIds' field has been set, false otherwise.
       */
-    public boolean hasTrigger() {
+    public boolean hasInputChannelIds() {
       return fieldSetFlags()[3];
     }
 
 
     /**
-      * Clears the value of the 'trigger' field.
+      * Clears the value of the 'inputChannelIds' field.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder clearTrigger() {
-      trigger = null;
+    public carldata.hs.avro.RealTimeJobAvro.Builder clearInputChannelIds() {
+      inputChannelIds = null;
       fieldSetFlags()[3] = false;
       return this;
     }
@@ -454,7 +454,7 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
       * @param value The value of 'outputChannelId'.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder setOutputChannelId(java.lang.CharSequence value) {
+    public carldata.hs.avro.RealTimeJobAvro.Builder setOutputChannelId(java.lang.CharSequence value) {
       validate(fields()[4], value);
       this.outputChannelId = value;
       fieldSetFlags()[4] = true;
@@ -474,7 +474,7 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
       * Clears the value of the 'outputChannelId' field.
       * @return This builder.
       */
-    public carldata.hs.avro.RealTimeRecordAvro.Builder clearOutputChannelId() {
+    public carldata.hs.avro.RealTimeJobAvro.Builder clearOutputChannelId() {
       outputChannelId = null;
       fieldSetFlags()[4] = false;
       return this;
@@ -482,13 +482,13 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
 
     @Override
     @SuppressWarnings("unchecked")
-    public RealTimeRecordAvro build() {
+    public RealTimeJobAvro build() {
       try {
-        RealTimeRecordAvro record = new RealTimeRecordAvro();
-        record.action = fieldSetFlags()[0] ? this.action : (carldata.hs.avro.RealTimeRecordActionAvro) defaultValue(fields()[0]);
+        RealTimeJobAvro record = new RealTimeJobAvro();
+        record.action = fieldSetFlags()[0] ? this.action : (java.lang.CharSequence) defaultValue(fields()[0]);
         record.calculationId = fieldSetFlags()[1] ? this.calculationId : (java.lang.CharSequence) defaultValue(fields()[1]);
         record.script = fieldSetFlags()[2] ? this.script : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[2]);
-        record.trigger = fieldSetFlags()[3] ? this.trigger : (java.lang.CharSequence) defaultValue(fields()[3]);
+        record.inputChannelIds = fieldSetFlags()[3] ? this.inputChannelIds : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[3]);
         record.outputChannelId = fieldSetFlags()[4] ? this.outputChannelId : (java.lang.CharSequence) defaultValue(fields()[4]);
         return record;
       } catch (java.lang.Exception e) {
@@ -498,8 +498,8 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumWriter<RealTimeRecordAvro>
-    WRITER$ = (org.apache.avro.io.DatumWriter<RealTimeRecordAvro>)MODEL$.createDatumWriter(SCHEMA$);
+  private static final org.apache.avro.io.DatumWriter<RealTimeJobAvro>
+    WRITER$ = (org.apache.avro.io.DatumWriter<RealTimeJobAvro>)MODEL$.createDatumWriter(SCHEMA$);
 
   @Override public void writeExternal(java.io.ObjectOutput out)
     throws java.io.IOException {
@@ -507,8 +507,8 @@ public class RealTimeRecordAvro extends org.apache.avro.specific.SpecificRecordB
   }
 
   @SuppressWarnings("unchecked")
-  private static final org.apache.avro.io.DatumReader<RealTimeRecordAvro>
-    READER$ = (org.apache.avro.io.DatumReader<RealTimeRecordAvro>)MODEL$.createDatumReader(SCHEMA$);
+  private static final org.apache.avro.io.DatumReader<RealTimeJobAvro>
+    READER$ = (org.apache.avro.io.DatumReader<RealTimeJobAvro>)MODEL$.createDatumReader(SCHEMA$);
 
   @Override public void readExternal(java.io.ObjectInput in)
     throws java.io.IOException {

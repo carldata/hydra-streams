@@ -11,39 +11,40 @@ object RealTime {
 
   case object RemoveAction extends Action
 
-  case object UnknownAction extends Action
+  case object ErrorAction extends Action
 
-  case class RealTimeRecord(action: Action, calculationId: String, script: String, trigger: String, outputChannelId: String)
+  case class RealTimeJobRecord(action: Action, calculationId: String, script: String,
+                               inputChannelIds: Seq[String], outputChannelId: String)
 
   object RealTimeJsonProtocol extends DefaultJsonProtocol {
 
-    implicit object RealTimeJsonFormat extends RootJsonFormat[RealTimeRecord] {
-      def write(r: RealTimeRecord) =
+    implicit object RealTimeJsonFormat extends RootJsonFormat[RealTimeJobRecord] {
+      def write(r: RealTimeJobRecord) =
         JsObject(
           r.action match {
             case AddAction => "action" -> JsString("AddAction")
             case RemoveAction => "action" -> JsString("RemoveAction")
-            case UnknownAction => "action" -> JsString("")
+            case ErrorAction => "action" -> JsString("error")
           },
           "calculationId" -> JsString(r.calculationId),
           "script" -> JsArray(r.script.split("\n").map(JsString.apply).toVector),
-          "trigger" -> JsString(r.trigger),
+          "inputChannelIds" -> JsArray(r.inputChannelIds.map(JsString.apply).toVector),
           "outputChannelId" -> JsString(r.outputChannelId)
         )
 
-      def read(value: JsValue): RealTimeRecord = value match {
+      def read(value: JsValue): RealTimeJobRecord = value match {
         case JsObject(fs) =>
           val action: Action = fs.get("action").map {
             case JsString("AddAction") => AddAction
             case JsString("RemoveAction") => RemoveAction
-            case _ => UnknownAction
-          }.getOrElse(UnknownAction)
+            case _ => ErrorAction
+          }.getOrElse(ErrorAction)
           val calculation: String = fs.get("calculationId").map(stringFromValue).getOrElse("")
           val script: String = fs.get("script").map(textFromLines).getOrElse("")
-          val trigger: String = fs.get("trigger").map(stringFromValue).getOrElse("")
+          val inputChannelIds: Seq[String] = fs.get("inputChannelIds").map(arrayFromValue).getOrElse(Seq())
           val outputChannel: String = fs.get("outputChannelId").map(stringFromValue).getOrElse("")
-          RealTimeRecord(action, calculation, script, trigger, outputChannel)
-        case _ => RealTimeRecord(UnknownAction, "json-format-error", "", "", "")
+          RealTimeJobRecord(action, calculation, script, inputChannelIds, outputChannel)
+        case _ => RealTimeJobRecord(ErrorAction, "", value.toString, Seq(), "")
       }
     }
 

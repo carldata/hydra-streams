@@ -9,7 +9,7 @@ import carldata.hs.Data.DataRecord
 import carldata.hs.EventBus.EventBusRecordJsonProtocol._
 import carldata.hs.EventBus.{BatchCalculationStarted, EventBusRecord}
 import carldata.hs.RealTime.RealTimeJsonProtocol._
-import carldata.hs.RealTime.{AddAction, RealTimeRecord}
+import carldata.hs.RealTime.{AddAction, RealTimeJobRecord}
 import org.scalatest.{FlatSpec, Matchers}
 import spray.json.JsonParser
 
@@ -43,11 +43,11 @@ class VersionTest extends FlatSpec with Matchers {
         |"action": "AddAction",
         |"calculationId": "C",
         |"script": ["line1", "line2"],
-        |"trigger" : "T",
+        |"inputChannelIds": ["IcId", "in2"],
         |"outputChannelId" : "oC"}
       """.stripMargin
-    val rec = JsonParser(source).convertTo[RealTimeRecord]
-    rec shouldBe RealTimeRecord(AddAction, "C", List("line1", "line2").mkString("\n"), "T", "oC")
+    val rec = JsonParser(source).convertTo[RealTimeJobRecord]
+    rec shouldBe RealTimeJobRecord(AddAction, "C", List("line1", "line2").mkString("\n"), List("IcId", "in2"), "oC")
   }
 
   "EventBusRecord" should "parse json version 1" in {

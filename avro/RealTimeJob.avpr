@@ -1,0 +1,11 @@
+{"namespace": "carldata.hs.avro",
+ "type": "record",
+ "name": "RealTimeJobAvro",
+ "fields": [
+     {"name": "action", "type": "string"},
+     {"name": "calculationId", "type": "string"},
+     {"name": "script", "type": {"type": "array", "items": "string"}},
+     {"name": "inputChannelIds", "type": {"type": "array", "items": "string"}},
+     {"name": "outputChannelId", "type": "string"}
+ ]
+}

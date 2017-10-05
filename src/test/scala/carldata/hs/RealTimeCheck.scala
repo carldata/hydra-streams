@@ -1,8 +1,8 @@
 package carldata.hs
 
 import carldata.hs.RealTime.RealTimeJsonProtocol._
-import carldata.hs.RealTime.{AddAction, RealTimeRecord, RemoveAction}
-import carldata.hs.avro.{RealTimeRecordActionAvro, RealTimeRecordAvro}
+import carldata.hs.RealTime.{AddAction, RealTimeJobRecord, RemoveAction}
+import carldata.hs.avro.{RealTimeJobAvro, RealTimeRecordActionAvro}
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Gen, Properties}
 import spray.json._
@@ -19,26 +19,26 @@ object RealTimeCheck extends Properties("RealTime") {
     action <- Gen.oneOf(AddAction, RemoveAction)
     calculation <- Gen.identifier
     script <- genScript
-    trigger <- Gen.identifier
+    inputChannelId <- Gen.listOf(Gen.identifier)
     outputChannel <- Gen.identifier
-  } yield RealTimeRecord(action, calculation, script, trigger, outputChannel)
+  } yield RealTimeJobRecord(action, calculation, script, inputChannelId, outputChannel)
 
   /** Record serialized to json and then parsed back should be the same */
-  property("parse") = forAll(realtimeRecordGen) { record: RealTimeRecord =>
+  property("parse") = forAll(realtimeRecordGen) { record: RealTimeJobRecord =>
     val source: String = record.toJson.compactPrint
-    val r2 = source.parseJson.convertTo[RealTimeRecord]
+    val r2 = source.parseJson.convertTo[RealTimeJobRecord]
     r2 == record
   }
 
   /** Check avro compatibility */
-  property("AVRO") = forAll(realtimeRecordGen) { rec: RealTimeRecord =>
-    val avro: RealTimeRecordAvro = new RealTimeRecordAvro(
-      RealTimeRecordActionAvro.valueOf(rec.action.toString),
+  property("AVRO") = forAll(realtimeRecordGen) { rec: RealTimeJobRecord =>
+    val avro = new RealTimeJobAvro(
+      rec.action.toString,
       rec.calculationId,
       seqAsJavaList(rec.script.split("\n")),
-      rec.trigger,
+      seqAsJavaList(rec.inputChannelIds),
       rec.outputChannelId)
     val avroStr = avro.toString
-    avroStr.parseJson.convertTo[RealTimeRecord] == rec
+    avroStr.parseJson.convertTo[RealTimeJobRecord] == rec
   }
 }
