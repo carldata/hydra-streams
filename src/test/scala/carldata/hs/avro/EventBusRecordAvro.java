@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = 192531963067327689L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventBusRecordAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"calculationId\",\"type\":\"string\"},{\"name\":\"status\",\"type\":{\"type\":\"enum\",\"name\":\"EventBusRecordStatusAvro\",\"symbols\":[\"BatchCalculationStarted\",\"BatchCalculationStopped\",\"Unknown\"]}}]}");
+  private static final long serialVersionUID = -7804131916011137149L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"EventBusRecordAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"source\",\"type\":\"string\"},{\"name\":\"id\",\"type\":\"string\"},{\"name\":\"status\",\"type\":\"string\"},{\"name\":\"msg\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -51,8 +51,10 @@ public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordB
     return DECODER.decode(b);
   }
 
-  @Deprecated public java.lang.CharSequence calculationId;
-  @Deprecated public carldata.hs.avro.EventBusRecordStatusAvro status;
+  @Deprecated public java.lang.CharSequence source;
+  @Deprecated public java.lang.CharSequence id;
+  @Deprecated public java.lang.CharSequence status;
+  @Deprecated public java.lang.CharSequence msg;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -63,20 +65,26 @@ public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordB
 
   /**
    * All-args constructor.
-   * @param calculationId The new value for calculationId
+   * @param source The new value for source
+   * @param id The new value for id
    * @param status The new value for status
+   * @param msg The new value for msg
    */
-  public EventBusRecordAvro(java.lang.CharSequence calculationId, carldata.hs.avro.EventBusRecordStatusAvro status) {
-    this.calculationId = calculationId;
+  public EventBusRecordAvro(java.lang.CharSequence source, java.lang.CharSequence id, java.lang.CharSequence status, java.lang.CharSequence msg) {
+    this.source = source;
+    this.id = id;
     this.status = status;
+    this.msg = msg;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
   // Used by DatumWriter.  Applications should not call.
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return calculationId;
-    case 1: return status;
+    case 0: return source;
+    case 1: return id;
+    case 2: return status;
+    case 3: return msg;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -85,33 +93,51 @@ public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordB
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: calculationId = (java.lang.CharSequence)value$; break;
-    case 1: status = (carldata.hs.avro.EventBusRecordStatusAvro)value$; break;
+    case 0: source = (java.lang.CharSequence)value$; break;
+    case 1: id = (java.lang.CharSequence)value$; break;
+    case 2: status = (java.lang.CharSequence)value$; break;
+    case 3: msg = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
 
   /**
-   * Gets the value of the 'calculationId' field.
-   * @return The value of the 'calculationId' field.
+   * Gets the value of the 'source' field.
+   * @return The value of the 'source' field.
    */
-  public java.lang.CharSequence getCalculationId() {
-    return calculationId;
+  public java.lang.CharSequence getSource() {
+    return source;
   }
 
   /**
-   * Sets the value of the 'calculationId' field.
+   * Sets the value of the 'source' field.
    * @param value the value to set.
    */
-  public void setCalculationId(java.lang.CharSequence value) {
-    this.calculationId = value;
+  public void setSource(java.lang.CharSequence value) {
+    this.source = value;
+  }
+
+  /**
+   * Gets the value of the 'id' field.
+   * @return The value of the 'id' field.
+   */
+  public java.lang.CharSequence getId() {
+    return id;
+  }
+
+  /**
+   * Sets the value of the 'id' field.
+   * @param value the value to set.
+   */
+  public void setId(java.lang.CharSequence value) {
+    this.id = value;
   }
 
   /**
    * Gets the value of the 'status' field.
    * @return The value of the 'status' field.
    */
-  public carldata.hs.avro.EventBusRecordStatusAvro getStatus() {
+  public java.lang.CharSequence getStatus() {
     return status;
   }
 
@@ -119,8 +145,24 @@ public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordB
    * Sets the value of the 'status' field.
    * @param value the value to set.
    */
-  public void setStatus(carldata.hs.avro.EventBusRecordStatusAvro value) {
+  public void setStatus(java.lang.CharSequence value) {
     this.status = value;
+  }
+
+  /**
+   * Gets the value of the 'msg' field.
+   * @return The value of the 'msg' field.
+   */
+  public java.lang.CharSequence getMsg() {
+    return msg;
+  }
+
+  /**
+   * Sets the value of the 'msg' field.
+   * @param value the value to set.
+   */
+  public void setMsg(java.lang.CharSequence value) {
+    this.msg = value;
   }
 
   /**
@@ -155,8 +197,10 @@ public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordB
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<EventBusRecordAvro>
     implements org.apache.avro.data.RecordBuilder<EventBusRecordAvro> {
 
-    private java.lang.CharSequence calculationId;
-    private carldata.hs.avro.EventBusRecordStatusAvro status;
+    private java.lang.CharSequence source;
+    private java.lang.CharSequence id;
+    private java.lang.CharSequence status;
+    private java.lang.CharSequence msg;
 
     /** Creates a new Builder */
     private Builder() {
@@ -169,13 +213,21 @@ public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordB
      */
     private Builder(carldata.hs.avro.EventBusRecordAvro.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.calculationId)) {
-        this.calculationId = data().deepCopy(fields()[0].schema(), other.calculationId);
+      if (isValidValue(fields()[0], other.source)) {
+        this.source = data().deepCopy(fields()[0].schema(), other.source);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.status)) {
-        this.status = data().deepCopy(fields()[1].schema(), other.status);
+      if (isValidValue(fields()[1], other.id)) {
+        this.id = data().deepCopy(fields()[1].schema(), other.id);
         fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.status)) {
+        this.status = data().deepCopy(fields()[2].schema(), other.status);
+        fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.msg)) {
+        this.msg = data().deepCopy(fields()[3].schema(), other.msg);
+        fieldSetFlags()[3] = true;
       }
     }
 
@@ -185,52 +237,99 @@ public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordB
      */
     private Builder(carldata.hs.avro.EventBusRecordAvro other) {
             super(SCHEMA$);
-      if (isValidValue(fields()[0], other.calculationId)) {
-        this.calculationId = data().deepCopy(fields()[0].schema(), other.calculationId);
+      if (isValidValue(fields()[0], other.source)) {
+        this.source = data().deepCopy(fields()[0].schema(), other.source);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.status)) {
-        this.status = data().deepCopy(fields()[1].schema(), other.status);
+      if (isValidValue(fields()[1], other.id)) {
+        this.id = data().deepCopy(fields()[1].schema(), other.id);
         fieldSetFlags()[1] = true;
+      }
+      if (isValidValue(fields()[2], other.status)) {
+        this.status = data().deepCopy(fields()[2].schema(), other.status);
+        fieldSetFlags()[2] = true;
+      }
+      if (isValidValue(fields()[3], other.msg)) {
+        this.msg = data().deepCopy(fields()[3].schema(), other.msg);
+        fieldSetFlags()[3] = true;
       }
     }
 
     /**
-      * Gets the value of the 'calculationId' field.
+      * Gets the value of the 'source' field.
       * @return The value.
       */
-    public java.lang.CharSequence getCalculationId() {
-      return calculationId;
+    public java.lang.CharSequence getSource() {
+      return source;
     }
 
     /**
-      * Sets the value of the 'calculationId' field.
-      * @param value The value of 'calculationId'.
+      * Sets the value of the 'source' field.
+      * @param value The value of 'source'.
       * @return This builder.
       */
-    public carldata.hs.avro.EventBusRecordAvro.Builder setCalculationId(java.lang.CharSequence value) {
+    public carldata.hs.avro.EventBusRecordAvro.Builder setSource(java.lang.CharSequence value) {
       validate(fields()[0], value);
-      this.calculationId = value;
+      this.source = value;
       fieldSetFlags()[0] = true;
       return this;
     }
 
     /**
-      * Checks whether the 'calculationId' field has been set.
-      * @return True if the 'calculationId' field has been set, false otherwise.
+      * Checks whether the 'source' field has been set.
+      * @return True if the 'source' field has been set, false otherwise.
       */
-    public boolean hasCalculationId() {
+    public boolean hasSource() {
       return fieldSetFlags()[0];
     }
 
 
     /**
-      * Clears the value of the 'calculationId' field.
+      * Clears the value of the 'source' field.
       * @return This builder.
       */
-    public carldata.hs.avro.EventBusRecordAvro.Builder clearCalculationId() {
-      calculationId = null;
+    public carldata.hs.avro.EventBusRecordAvro.Builder clearSource() {
+      source = null;
       fieldSetFlags()[0] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'id' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getId() {
+      return id;
+    }
+
+    /**
+      * Sets the value of the 'id' field.
+      * @param value The value of 'id'.
+      * @return This builder.
+      */
+    public carldata.hs.avro.EventBusRecordAvro.Builder setId(java.lang.CharSequence value) {
+      validate(fields()[1], value);
+      this.id = value;
+      fieldSetFlags()[1] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'id' field has been set.
+      * @return True if the 'id' field has been set, false otherwise.
+      */
+    public boolean hasId() {
+      return fieldSetFlags()[1];
+    }
+
+
+    /**
+      * Clears the value of the 'id' field.
+      * @return This builder.
+      */
+    public carldata.hs.avro.EventBusRecordAvro.Builder clearId() {
+      id = null;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -238,7 +337,7 @@ public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordB
       * Gets the value of the 'status' field.
       * @return The value.
       */
-    public carldata.hs.avro.EventBusRecordStatusAvro getStatus() {
+    public java.lang.CharSequence getStatus() {
       return status;
     }
 
@@ -247,10 +346,10 @@ public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordB
       * @param value The value of 'status'.
       * @return This builder.
       */
-    public carldata.hs.avro.EventBusRecordAvro.Builder setStatus(carldata.hs.avro.EventBusRecordStatusAvro value) {
-      validate(fields()[1], value);
+    public carldata.hs.avro.EventBusRecordAvro.Builder setStatus(java.lang.CharSequence value) {
+      validate(fields()[2], value);
       this.status = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -259,7 +358,7 @@ public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordB
       * @return True if the 'status' field has been set, false otherwise.
       */
     public boolean hasStatus() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
 
 
@@ -269,7 +368,46 @@ public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordB
       */
     public carldata.hs.avro.EventBusRecordAvro.Builder clearStatus() {
       status = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'msg' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getMsg() {
+      return msg;
+    }
+
+    /**
+      * Sets the value of the 'msg' field.
+      * @param value The value of 'msg'.
+      * @return This builder.
+      */
+    public carldata.hs.avro.EventBusRecordAvro.Builder setMsg(java.lang.CharSequence value) {
+      validate(fields()[3], value);
+      this.msg = value;
+      fieldSetFlags()[3] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'msg' field has been set.
+      * @return True if the 'msg' field has been set, false otherwise.
+      */
+    public boolean hasMsg() {
+      return fieldSetFlags()[3];
+    }
+
+
+    /**
+      * Clears the value of the 'msg' field.
+      * @return This builder.
+      */
+    public carldata.hs.avro.EventBusRecordAvro.Builder clearMsg() {
+      msg = null;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -278,8 +416,10 @@ public class EventBusRecordAvro extends org.apache.avro.specific.SpecificRecordB
     public EventBusRecordAvro build() {
       try {
         EventBusRecordAvro record = new EventBusRecordAvro();
-        record.calculationId = fieldSetFlags()[0] ? this.calculationId : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.status = fieldSetFlags()[1] ? this.status : (carldata.hs.avro.EventBusRecordStatusAvro) defaultValue(fields()[1]);
+        record.source = fieldSetFlags()[0] ? this.source : (java.lang.CharSequence) defaultValue(fields()[0]);
+        record.id = fieldSetFlags()[1] ? this.id : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.status = fieldSetFlags()[2] ? this.status : (java.lang.CharSequence) defaultValue(fields()[2]);
+        record.msg = fieldSetFlags()[3] ? this.msg : (java.lang.CharSequence) defaultValue(fields()[3]);
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

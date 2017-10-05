@@ -2,11 +2,9 @@
  "type": "record",
  "name": "EventBusRecordAvro",
  "fields": [
-     {"name": "calculationId", "type": "string"},
-     {"name": "status", "type": {
-        "type": "enum",
-        "name": "EventBusRecordStatusAvro",
-        "symbols" : ["BatchCalculationStarted", "BatchCalculationStopped", "Unknown"]
-     }}
+     {"name": "source", "type": "string"},
+     {"name": "id", "type": "string"},
+     {"name": "status", "type": "string"},
+     {"name": "msg", "type": "string"}
  ]
 }
