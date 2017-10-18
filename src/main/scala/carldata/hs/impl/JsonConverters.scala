@@ -53,6 +53,7 @@ object JsonConverters {
       .appendValue(ChronoField.MINUTE_OF_HOUR)
       .optionalStart.appendLiteral(':').appendValue(ChronoField.SECOND_OF_MINUTE).optionalEnd
       .optionalStart.appendFraction(ChronoField.NANO_OF_SECOND, 0, 9, true).optionalEnd
+      .optionalStart.appendLiteral('Z').optionalEnd
       .optionalEnd
       .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
       .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
