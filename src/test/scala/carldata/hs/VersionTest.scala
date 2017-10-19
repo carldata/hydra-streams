@@ -30,7 +30,7 @@ class VersionTest extends FlatSpec with Matchers {
   it should "parse null value" in {
     val source =
       """
-        |{"channelId": "A", "timestamp": "2015-01-01T00:00:00", "value": null}
+        |{"channelId": "A", "timestamp": "2015-01-01T00:00:00Z", "value": null}
       """.stripMargin
     val rec = JsonParser(source).convertTo[DataRecord]
     rec.value.isNaN shouldBe true
