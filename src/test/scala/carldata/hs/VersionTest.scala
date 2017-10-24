@@ -6,12 +6,15 @@ import carldata.hs.Batch.BatchRecordJsonProtocol._
 import carldata.hs.Batch.BatchRecord
 import carldata.hs.Data.DataJsonProtocol._
 import carldata.hs.Data.DataRecord
+import carldata.hs.DeleteData.DeleteDataRecord
+import carldata.hs.DeleteData.DeleteDataJsonProtocol._
 import carldata.hs.EventBus.EventBusRecordJsonProtocol._
-import carldata.hs.EventBus.{Started, EventBusRecord}
+import carldata.hs.EventBus.{EventBusRecord, Started}
 import carldata.hs.RealTime.RealTimeJsonProtocol._
 import carldata.hs.RealTime.{AddAction, RealTimeJobRecord}
 import org.scalatest.{FlatSpec, Matchers}
 import spray.json.JsonParser
+
 
 /**
   * Test that records can read each version of the protocol
@@ -74,7 +77,7 @@ class VersionTest extends FlatSpec with Matchers {
       LocalDateTime.of(2015, 1, 1, 0, 0, 0), LocalDateTime.of(2015, 1, 1, 0, 0, 0))
   }
 
-  "BatchRecord" should "parse json with date only" in {
+  it should "parse json with date only" in {
     val source =
       """
         |{"calculationId": "CId",
@@ -87,6 +90,18 @@ class VersionTest extends FlatSpec with Matchers {
     val rec = JsonParser(source).convertTo[BatchRecord]
     rec shouldBe BatchRecord("CId", List("line1", "line2").mkString("\n"), List("IcId"), "OcId",
       LocalDateTime.of(2015, 1, 1, 0, 0, 0), LocalDateTime.of(2015, 1, 12, 0, 0, 0))
+  }
+
+  "DeleteRecord" should "parse json version 1" in {
+    val source =
+      """
+        |{"actionId": "123",
+        |"channelId" : "456",
+        |"startDate" : "2015-01-01T00:00:00",
+        |"endDate": "2015-01-01T00:00:00" }
+      """.stripMargin
+    val rec = JsonParser(source).convertTo[DeleteDataRecord]
+    rec shouldBe DeleteDataRecord("123", "456", LocalDateTime.of(2015, 1, 1, 0, 0, 0), LocalDateTime.of(2015, 1, 1, 0, 0, 0))
   }
 
 }

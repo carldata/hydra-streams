@@ -1,0 +1,10 @@
+{"namespace": "carldata.hs.avro",
+ "type": "record",
+ "name": "DeleteDataAvro",
+ "fields": [
+     {"name": "actionId", "type": "string"},
+     {"name": "channelId", "type": "string"},
+     {"name": "startDate", "type": "string"},
+     {"name": "endDate",  "type": "string"}
+ ]
+}
