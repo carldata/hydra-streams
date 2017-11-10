@@ -6,6 +6,8 @@
      {"name": "calculationId", "type": "string"},
      {"name": "script", "type": {"type": "array", "items": "string"}},
      {"name": "inputChannelIds", "type": {"type": "array", "items": "string"}},
-     {"name": "outputChannelId", "type": "string"}
+     {"name": "outputChannelId", "type": "string"},
+     {"name": "startDate", "type": "string"},
+     {"name": "endDate",  "type": "string"}
  ]
 }

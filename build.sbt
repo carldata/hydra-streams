@@ -1,10 +1,10 @@
 name := "hydra-streams"
 
-version := "0.4.5"
+version := "0.5.0"
 
 organization := "io.github.carldata"
 
-scalaVersion := "2.12.3"
+scalaVersion := "2.12.4"
 
 libraryDependencies ++= Seq(
   // Scala native libraries

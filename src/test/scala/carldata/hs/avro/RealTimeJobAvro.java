@@ -13,8 +13,8 @@ import org.apache.avro.message.SchemaStore;
 @SuppressWarnings("all")
 @org.apache.avro.specific.AvroGenerated
 public class RealTimeJobAvro extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -1033120010213913818L;
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RealTimeJobAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"action\",\"type\":\"string\"},{\"name\":\"calculationId\",\"type\":\"string\"},{\"name\":\"script\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"inputChannelIds\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"outputChannelId\",\"type\":\"string\"}]}");
+  private static final long serialVersionUID = 2493895130481205523L;
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"RealTimeJobAvro\",\"namespace\":\"carldata.hs.avro\",\"fields\":[{\"name\":\"action\",\"type\":\"string\"},{\"name\":\"calculationId\",\"type\":\"string\"},{\"name\":\"script\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"inputChannelIds\",\"type\":{\"type\":\"array\",\"items\":\"string\"}},{\"name\":\"outputChannelId\",\"type\":\"string\"},{\"name\":\"startDate\",\"type\":\"string\"},{\"name\":\"endDate\",\"type\":\"string\"}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static SpecificData MODEL$ = new SpecificData();
@@ -56,6 +56,8 @@ public class RealTimeJobAvro extends org.apache.avro.specific.SpecificRecordBase
   @Deprecated public java.util.List<java.lang.CharSequence> script;
   @Deprecated public java.util.List<java.lang.CharSequence> inputChannelIds;
   @Deprecated public java.lang.CharSequence outputChannelId;
+  @Deprecated public java.lang.CharSequence startDate;
+  @Deprecated public java.lang.CharSequence endDate;
 
   /**
    * Default constructor.  Note that this does not initialize fields
@@ -71,13 +73,17 @@ public class RealTimeJobAvro extends org.apache.avro.specific.SpecificRecordBase
    * @param script The new value for script
    * @param inputChannelIds The new value for inputChannelIds
    * @param outputChannelId The new value for outputChannelId
+   * @param startDate The new value for startDate
+   * @param endDate The new value for endDate
    */
-  public RealTimeJobAvro(java.lang.CharSequence action, java.lang.CharSequence calculationId, java.util.List<java.lang.CharSequence> script, java.util.List<java.lang.CharSequence> inputChannelIds, java.lang.CharSequence outputChannelId) {
+  public RealTimeJobAvro(java.lang.CharSequence action, java.lang.CharSequence calculationId, java.util.List<java.lang.CharSequence> script, java.util.List<java.lang.CharSequence> inputChannelIds, java.lang.CharSequence outputChannelId, java.lang.CharSequence startDate, java.lang.CharSequence endDate) {
     this.action = action;
     this.calculationId = calculationId;
     this.script = script;
     this.inputChannelIds = inputChannelIds;
     this.outputChannelId = outputChannelId;
+    this.startDate = startDate;
+    this.endDate = endDate;
   }
 
   public org.apache.avro.Schema getSchema() { return SCHEMA$; }
@@ -89,6 +95,8 @@ public class RealTimeJobAvro extends org.apache.avro.specific.SpecificRecordBase
     case 2: return script;
     case 3: return inputChannelIds;
     case 4: return outputChannelId;
+    case 5: return startDate;
+    case 6: return endDate;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -102,6 +110,8 @@ public class RealTimeJobAvro extends org.apache.avro.specific.SpecificRecordBase
     case 2: script = (java.util.List<java.lang.CharSequence>)value$; break;
     case 3: inputChannelIds = (java.util.List<java.lang.CharSequence>)value$; break;
     case 4: outputChannelId = (java.lang.CharSequence)value$; break;
+    case 5: startDate = (java.lang.CharSequence)value$; break;
+    case 6: endDate = (java.lang.CharSequence)value$; break;
     default: throw new org.apache.avro.AvroRuntimeException("Bad index");
     }
   }
@@ -187,6 +197,38 @@ public class RealTimeJobAvro extends org.apache.avro.specific.SpecificRecordBase
   }
 
   /**
+   * Gets the value of the 'startDate' field.
+   * @return The value of the 'startDate' field.
+   */
+  public java.lang.CharSequence getStartDate() {
+    return startDate;
+  }
+
+  /**
+   * Sets the value of the 'startDate' field.
+   * @param value the value to set.
+   */
+  public void setStartDate(java.lang.CharSequence value) {
+    this.startDate = value;
+  }
+
+  /**
+   * Gets the value of the 'endDate' field.
+   * @return The value of the 'endDate' field.
+   */
+  public java.lang.CharSequence getEndDate() {
+    return endDate;
+  }
+
+  /**
+   * Sets the value of the 'endDate' field.
+   * @param value the value to set.
+   */
+  public void setEndDate(java.lang.CharSequence value) {
+    this.endDate = value;
+  }
+
+  /**
    * Creates a new RealTimeJobAvro RecordBuilder.
    * @return A new RealTimeJobAvro RecordBuilder
    */
@@ -223,6 +265,8 @@ public class RealTimeJobAvro extends org.apache.avro.specific.SpecificRecordBase
     private java.util.List<java.lang.CharSequence> script;
     private java.util.List<java.lang.CharSequence> inputChannelIds;
     private java.lang.CharSequence outputChannelId;
+    private java.lang.CharSequence startDate;
+    private java.lang.CharSequence endDate;
 
     /** Creates a new Builder */
     private Builder() {
@@ -255,6 +299,14 @@ public class RealTimeJobAvro extends org.apache.avro.specific.SpecificRecordBase
         this.outputChannelId = data().deepCopy(fields()[4].schema(), other.outputChannelId);
         fieldSetFlags()[4] = true;
       }
+      if (isValidValue(fields()[5], other.startDate)) {
+        this.startDate = data().deepCopy(fields()[5].schema(), other.startDate);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.endDate)) {
+        this.endDate = data().deepCopy(fields()[6].schema(), other.endDate);
+        fieldSetFlags()[6] = true;
+      }
     }
 
     /**
@@ -282,6 +334,14 @@ public class RealTimeJobAvro extends org.apache.avro.specific.SpecificRecordBase
       if (isValidValue(fields()[4], other.outputChannelId)) {
         this.outputChannelId = data().deepCopy(fields()[4].schema(), other.outputChannelId);
         fieldSetFlags()[4] = true;
+      }
+      if (isValidValue(fields()[5], other.startDate)) {
+        this.startDate = data().deepCopy(fields()[5].schema(), other.startDate);
+        fieldSetFlags()[5] = true;
+      }
+      if (isValidValue(fields()[6], other.endDate)) {
+        this.endDate = data().deepCopy(fields()[6].schema(), other.endDate);
+        fieldSetFlags()[6] = true;
       }
     }
 
@@ -480,6 +540,84 @@ public class RealTimeJobAvro extends org.apache.avro.specific.SpecificRecordBase
       return this;
     }
 
+    /**
+      * Gets the value of the 'startDate' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getStartDate() {
+      return startDate;
+    }
+
+    /**
+      * Sets the value of the 'startDate' field.
+      * @param value The value of 'startDate'.
+      * @return This builder.
+      */
+    public carldata.hs.avro.RealTimeJobAvro.Builder setStartDate(java.lang.CharSequence value) {
+      validate(fields()[5], value);
+      this.startDate = value;
+      fieldSetFlags()[5] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'startDate' field has been set.
+      * @return True if the 'startDate' field has been set, false otherwise.
+      */
+    public boolean hasStartDate() {
+      return fieldSetFlags()[5];
+    }
+
+
+    /**
+      * Clears the value of the 'startDate' field.
+      * @return This builder.
+      */
+    public carldata.hs.avro.RealTimeJobAvro.Builder clearStartDate() {
+      startDate = null;
+      fieldSetFlags()[5] = false;
+      return this;
+    }
+
+    /**
+      * Gets the value of the 'endDate' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getEndDate() {
+      return endDate;
+    }
+
+    /**
+      * Sets the value of the 'endDate' field.
+      * @param value The value of 'endDate'.
+      * @return This builder.
+      */
+    public carldata.hs.avro.RealTimeJobAvro.Builder setEndDate(java.lang.CharSequence value) {
+      validate(fields()[6], value);
+      this.endDate = value;
+      fieldSetFlags()[6] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'endDate' field has been set.
+      * @return True if the 'endDate' field has been set, false otherwise.
+      */
+    public boolean hasEndDate() {
+      return fieldSetFlags()[6];
+    }
+
+
+    /**
+      * Clears the value of the 'endDate' field.
+      * @return This builder.
+      */
+    public carldata.hs.avro.RealTimeJobAvro.Builder clearEndDate() {
+      endDate = null;
+      fieldSetFlags()[6] = false;
+      return this;
+    }
+
     @Override
     @SuppressWarnings("unchecked")
     public RealTimeJobAvro build() {
@@ -490,6 +628,8 @@ public class RealTimeJobAvro extends org.apache.avro.specific.SpecificRecordBase
         record.script = fieldSetFlags()[2] ? this.script : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[2]);
         record.inputChannelIds = fieldSetFlags()[3] ? this.inputChannelIds : (java.util.List<java.lang.CharSequence>) defaultValue(fields()[3]);
         record.outputChannelId = fieldSetFlags()[4] ? this.outputChannelId : (java.lang.CharSequence) defaultValue(fields()[4]);
+        record.startDate = fieldSetFlags()[5] ? this.startDate : (java.lang.CharSequence) defaultValue(fields()[5]);
+        record.endDate = fieldSetFlags()[6] ? this.endDate : (java.lang.CharSequence) defaultValue(fields()[6]);
         return record;
       } catch (java.lang.Exception e) {
         throw new org.apache.avro.AvroRuntimeException(e);

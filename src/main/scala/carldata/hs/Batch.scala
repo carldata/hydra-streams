@@ -7,7 +7,8 @@ import carldata.hs.impl.JsonConverters.{stringFromValue, textFromLines, timestam
 import spray.json.{DefaultJsonProtocol, JsArray, JsObject, JsString, JsValue, RootJsonFormat}
 
 object Batch {
-  case class BatchRecord(calculationId: String, script: String, inputChannelIds: Seq[String], outputChannelId: String, startDate: LocalDateTime, endDate: LocalDateTime)
+  case class BatchRecord(calculationId: String, script: String, inputChannelIds: Seq[String], outputChannelId: String,
+                         startDate: LocalDateTime, endDate: LocalDateTime)
 
   object BatchRecordJsonProtocol extends DefaultJsonProtocol {
 

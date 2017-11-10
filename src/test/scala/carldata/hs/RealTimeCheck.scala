@@ -1,7 +1,9 @@
 package carldata.hs
 
+import java.time.LocalDateTime
+
 import carldata.hs.RealTime.RealTimeJsonProtocol._
-import carldata.hs.RealTime.{AddAction, RealTimeJobRecord, RemoveAction}
+import carldata.hs.RealTime.{AddRealTimeJob, RealTimeJob, RemoveRealTimeJob}
 import carldata.hs.avro.RealTimeJobAvro
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Gen, Properties}
@@ -15,30 +17,37 @@ object RealTimeCheck extends Properties("RealTime") {
     ls <- Gen.listOf(Gen.alphaNumStr)
   } yield ls.mkString("\n").trim
 
-  private val realtimeRecordGen = for {
-    action <- Gen.oneOf(AddAction, RemoveAction)
+  private val addRealTimeJobGen = for {
     calculation <- Gen.identifier
     script <- genScript
     inputChannelId <- Gen.listOf(Gen.identifier)
     outputChannel <- Gen.identifier
-  } yield RealTimeJobRecord(action, calculation, script, inputChannelId, outputChannel)
+  } yield AddRealTimeJob(calculation, script, inputChannelId, outputChannel, LocalDateTime.now(), LocalDateTime.now())
+
+  private val removeRealTimeJobGen = for {
+    calculation <- Gen.identifier
+  } yield RemoveRealTimeJob(calculation)
+
+  private val realTimeJobGen = Gen.oneOf(addRealTimeJobGen, removeRealTimeJobGen)
 
   /** Record serialized to json and then parsed back should be the same */
-  property("parse") = forAll(realtimeRecordGen) { record: RealTimeJobRecord =>
+  property("parse") = forAll(realTimeJobGen) { record: RealTimeJob =>
     val source: String = record.toJson.compactPrint
-    val r2 = source.parseJson.convertTo[RealTimeJobRecord]
+    val r2 = source.parseJson.convertTo[RealTimeJob]
     r2 == record
   }
 
   /** Check avro compatibility */
-  property("AVRO") = forAll(realtimeRecordGen) { rec: RealTimeJobRecord =>
-    val avro = new RealTimeJobAvro(
-      rec.action.toString,
-      rec.calculationId,
-      seqAsJavaList(rec.script.split("\n")),
-      seqAsJavaList(rec.inputChannelIds),
-      rec.outputChannelId)
+  property("AVRO") = forAll(realTimeJobGen) { job: RealTimeJob =>
+    val avro = job match {
+      case rec: AddRealTimeJob =>
+        new RealTimeJobAvro("AddAction", rec.calculationId, seqAsJavaList(rec.script.split("\n")),
+          seqAsJavaList(rec.inputChannelIds), rec.outputChannelId, rec.startDate.toString, rec.endDate.toString)
+      case rec: RemoveRealTimeJob =>
+        new RealTimeJobAvro("RemoveAction", rec.calculationId, seqAsJavaList(List()), seqAsJavaList(List()), "", "", "")
+    }
+
     val avroStr = avro.toString
-    avroStr.parseJson.convertTo[RealTimeJobRecord] == rec
+    avroStr.parseJson.convertTo[RealTimeJob] == job
   }
 }

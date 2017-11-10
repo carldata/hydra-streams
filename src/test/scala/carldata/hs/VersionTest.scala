@@ -11,7 +11,7 @@ import carldata.hs.DeleteData.DeleteDataJsonProtocol._
 import carldata.hs.EventBus.EventBusRecordJsonProtocol._
 import carldata.hs.EventBus.{EventBusRecord, Started}
 import carldata.hs.RealTime.RealTimeJsonProtocol._
-import carldata.hs.RealTime.{AddAction, RealTimeJobRecord}
+import carldata.hs.RealTime._
 import org.scalatest.{FlatSpec, Matchers}
 import spray.json.JsonParser
 
@@ -39,7 +39,7 @@ class VersionTest extends FlatSpec with Matchers {
     rec.value.isNaN shouldBe true
   }
 
-  "RealTimeRecord" should "parse json version 1" in {
+  "AddRealTimeJob" should "parse json version 1" in {
     val source =
       """
         |{
@@ -47,10 +47,24 @@ class VersionTest extends FlatSpec with Matchers {
         |"calculationId": "C",
         |"script": ["line1", "line2"],
         |"inputChannelIds": ["IcId", "in2"],
-        |"outputChannelId" : "oC"}
+        |"outputChannelId" : "oC",
+        |"startDate" : "2015-01-01T00:00:00",
+        |"endDate": "2015-01-01T00:00:00" }
       """.stripMargin
-    val rec = JsonParser(source).convertTo[RealTimeJobRecord]
-    rec shouldBe RealTimeJobRecord(AddAction, "C", List("line1", "line2").mkString("\n"), List("IcId", "in2"), "oC")
+    val rec = JsonParser(source).convertTo[RealTimeJob]
+    rec shouldBe AddRealTimeJob("C", List("line1", "line2").mkString("\n"), List("IcId", "in2"), "oC",
+      LocalDateTime.of(2015, 1, 1, 0, 0, 0), LocalDateTime.of(2015, 1, 1, 0, 0, 0))
+  }
+
+  "RemoveRealTimeJob" should "parse json version 1" in {
+    val source =
+      """
+        |{
+        |"action": "RemoveAction",
+        |"calculationId": "C" }
+      """.stripMargin
+    val rec = JsonParser(source).convertTo[RealTimeJob]
+    rec shouldBe RemoveRealTimeJob("C")
   }
 
   "EventBusRecord" should "parse json version 1" in {

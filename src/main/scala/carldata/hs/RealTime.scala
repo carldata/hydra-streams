@@ -1,53 +1,60 @@
 package carldata.hs
 
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+
 import carldata.hs.impl.JsonConverters._
 import spray.json.{DefaultJsonProtocol, JsArray, JsObject, JsString, JsValue, RootJsonFormat}
 
 object RealTime {
 
-  sealed trait Action
+  sealed trait RealTimeJob
 
-  case object AddAction extends Action
+  case class AddRealTimeJob(calculationId: String, script: String, inputChannelIds: Seq[String], outputChannelId: String,
+                            startDate: LocalDateTime, endDate: LocalDateTime) extends RealTimeJob
 
-  case object RemoveAction extends Action
-
-  case object ErrorAction extends Action
-
-  case class RealTimeJobRecord(action: Action, calculationId: String, script: String,
-                               inputChannelIds: Seq[String], outputChannelId: String)
+  case class RemoveRealTimeJob(calculationId: String) extends RealTimeJob
 
   object RealTimeJsonProtocol extends DefaultJsonProtocol {
 
-    implicit object RealTimeJsonFormat extends RootJsonFormat[RealTimeJobRecord] {
-      def write(r: RealTimeJobRecord) =
-        JsObject(
-          r.action match {
-            case AddAction => "action" -> JsString("AddAction")
-            case RemoveAction => "action" -> JsString("RemoveAction")
-            case ErrorAction => "action" -> JsString("error")
-          },
-          "calculationId" -> JsString(r.calculationId),
-          "script" -> JsArray(r.script.split("\n").map(JsString.apply).toVector),
-          "inputChannelIds" -> JsArray(r.inputChannelIds.map(JsString.apply).toVector),
-          "outputChannelId" -> JsString(r.outputChannelId)
-        )
+    implicit object realTimeJsonFormat extends RootJsonFormat[RealTimeJob] {
+      def write(job: RealTimeJob): JsObject = {
+        job match {
+          case r: AddRealTimeJob =>
+            JsObject(
+              "action" -> JsString("AddAction"),
+              "calculationId" -> JsString(r.calculationId),
+              "script" -> JsArray(r.script.split("\n").map(JsString.apply).toVector),
+              "inputChannelIds" -> JsArray(r.inputChannelIds.map(JsString.apply).toVector),
+              "outputChannelId" -> JsString(r.outputChannelId),
+              "startDate" -> JsString(r.startDate.format(DateTimeFormatter.ISO_DATE_TIME)),
+              "endDate" -> JsString(r.endDate.format(DateTimeFormatter.ISO_DATE_TIME))
+            )
+          case r: RemoveRealTimeJob =>
+            JsObject(
+              "action" -> JsString("RemoveAction"),
+              "calculationId" -> JsString(r.calculationId)
+            )
+        }
+      }
 
-      def read(value: JsValue): RealTimeJobRecord = value match {
+      def read(value: JsValue): RealTimeJob = value match {
         case JsObject(fs) =>
-          val action: Action = fs.get("action").map {
-            case JsString("AddAction") => AddAction
-            case JsString("RemoveAction") => RemoveAction
-            case _ => ErrorAction
-          }.getOrElse(ErrorAction)
-          val calculation: String = fs.get("calculationId").map(stringFromValue).getOrElse("")
-          val script: String = fs.get("script").map(textFromLines).getOrElse("")
-          val inputChannelIds: Seq[String] = fs.get("inputChannelIds").map(arrayFromValue).getOrElse(Seq())
-          val outputChannel: String = fs.get("outputChannelId").map(stringFromValue).getOrElse("")
-          RealTimeJobRecord(action, calculation, script, inputChannelIds, outputChannel)
-        case _ => RealTimeJobRecord(ErrorAction, "", value.toString, Seq(), "")
+          fs.get("action").map {
+            case JsString("RemoveAction") =>
+              val calculation: String = fs.get("calculationId").map(stringFromValue).getOrElse("")
+              RemoveRealTimeJob(calculation)
+
+            case _ =>
+              val calculation: String = fs.get("calculationId").map(stringFromValue).getOrElse("")
+              val script: String = fs.get("script").map(textFromLines).getOrElse("")
+              val inputChannelIds: Seq[String] = fs.get("inputChannelIds").map(arrayFromValue).getOrElse(Seq())
+              val outputChannel: String = fs.get("outputChannelId").map(stringFromValue).getOrElse("")
+              val startDate: LocalDateTime = fs.get("startDate").map(timestampFromValue).getOrElse(LocalDateTime.now())
+              val endDate: LocalDateTime = fs.get("endDate").map(timestampFromValue).getOrElse(LocalDateTime.now())
+              AddRealTimeJob(calculation, script, inputChannelIds, outputChannel, startDate, endDate)
+          }.getOrElse(AddRealTimeJob("", "", Seq(), "", LocalDateTime.now(), LocalDateTime.now()))
       }
     }
-
   }
-
 }
