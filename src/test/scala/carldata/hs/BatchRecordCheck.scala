@@ -1,6 +1,6 @@
 package carldata.hs
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 import carldata.hs.Batch.BatchRecord
 import carldata.hs.Batch.BatchRecordJsonProtocol._
@@ -11,7 +11,7 @@ import spray.json._
 
 import scala.collection.JavaConverters._
 
-object BatchRecordCheck extends Properties("Batch")  {
+object BatchRecordCheck extends Properties("Batch") {
 
   private val genScript = for {
     ls <- Gen.listOf(Gen.alphaNumStr)
@@ -22,7 +22,7 @@ object BatchRecordCheck extends Properties("Batch")  {
     script <- genScript
     inputChannelId <- Gen.listOf(Gen.identifier)
     outputChannelId <- Gen.identifier
-  } yield BatchRecord(calculationId, script, inputChannelId, outputChannelId, LocalDateTime.now(), LocalDateTime.now())
+  } yield BatchRecord(calculationId, script, inputChannelId, outputChannelId, ZonedDateTime.now, ZonedDateTime.now)
 
   /** Record serialized to json and then parsed back should be the same */
   property("parse") = forAll(batchRecordGen) { record: BatchRecord =>

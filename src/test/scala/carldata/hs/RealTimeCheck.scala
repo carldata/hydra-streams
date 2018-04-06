@@ -1,6 +1,6 @@
 package carldata.hs
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 import carldata.hs.RealTime.RealTimeJsonProtocol._
 import carldata.hs.RealTime.{AddRealTimeJob, RealTimeJob, RemoveRealTimeJob}
@@ -22,7 +22,7 @@ object RealTimeCheck extends Properties("RealTime") {
     script <- genScript
     inputChannelId <- Gen.listOf(Gen.identifier)
     outputChannel <- Gen.identifier
-  } yield AddRealTimeJob(calculation, script, inputChannelId, outputChannel, LocalDateTime.now(), LocalDateTime.now())
+  } yield AddRealTimeJob(calculation, script, inputChannelId, outputChannel, ZonedDateTime.now, ZonedDateTime.now)
 
   private val removeRealTimeJobGen = for {
     calculation <- Gen.identifier

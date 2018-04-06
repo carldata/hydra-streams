@@ -1,6 +1,6 @@
 package carldata.hs
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 import carldata.hs.DeleteData.DeleteDataJsonProtocol._
 import carldata.hs.DeleteData.DeleteDataRecord
@@ -15,7 +15,7 @@ object DeleteDataCheck extends Properties("DeleteData") {
   private val ddRecordGen = for {
     id <- Gen.identifier
     channelId <- Gen.identifier
-  } yield DeleteDataRecord(id, channelId, LocalDateTime.now(), LocalDateTime.now())
+  } yield DeleteDataRecord(id, channelId, ZonedDateTime.now, ZonedDateTime.now)
 
   /** Record serialized to json and then parsed back should be the same */
   property("parse") = forAll(ddRecordGen) { record: DeleteDataRecord =>

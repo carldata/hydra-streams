@@ -1,14 +1,15 @@
 package carldata.hs
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-import carldata.hs.impl.JsonConverters.{stringFromValue, textFromLines, timestampFromValue, arrayFromValue}
+import carldata.hs.impl.JsonConverters.{arrayFromValue, stringFromValue, textFromLines, timestampFromValue}
 import spray.json.{DefaultJsonProtocol, JsArray, JsObject, JsString, JsValue, RootJsonFormat}
 
 object Batch {
+
   case class BatchRecord(calculationId: String, script: String, inputChannelIds: Seq[String], outputChannelId: String,
-                         startDate: LocalDateTime, endDate: LocalDateTime)
+                         startDate: ZonedDateTime, endDate: ZonedDateTime)
 
   object BatchRecordJsonProtocol extends DefaultJsonProtocol {
 
@@ -28,12 +29,14 @@ object Batch {
           val script: String = fs.get("script").map(textFromLines).getOrElse("")
           val inputChannelId: Seq[String] = fs.get("inputChannelIds").map(arrayFromValue).getOrElse(Seq())
           val outputChannelId: String = fs.get("outputChannelId").map(stringFromValue).getOrElse("")
-          val startDate: LocalDateTime = fs.get("startDate").map(timestampFromValue).getOrElse(LocalDateTime.now())
-          val endDate: LocalDateTime = fs.get("endDate").map(timestampFromValue).getOrElse(LocalDateTime.now())
+          val startDate: ZonedDateTime = fs.get("startDate").map(timestampFromValue).getOrElse(ZonedDateTime.now)
+          val endDate: ZonedDateTime = fs.get("endDate").map(timestampFromValue).getOrElse(ZonedDateTime.now)
           BatchRecord(calculationId, script, inputChannelId, outputChannelId, startDate, endDate)
         case _ => BatchRecord("json-format-error", "json-format-error", Seq("json-format-error"), "json-format-error",
-          LocalDateTime.now(), LocalDateTime.now())
+          ZonedDateTime.now, ZonedDateTime.now)
       }
     }
+
   }
+
 }

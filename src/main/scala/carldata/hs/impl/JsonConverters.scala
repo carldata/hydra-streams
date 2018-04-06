@@ -1,8 +1,8 @@
 package carldata.hs.impl
 
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatterBuilder
+import java.time.format.{DateTimeFormatter, DateTimeFormatterBuilder}
 import java.time.temporal.ChronoField
+import java.time.{LocalDateTime, ZoneId, ZonedDateTime}
 
 import spray.json.{JsArray, JsNumber, JsString, JsValue}
 
@@ -16,15 +16,15 @@ object JsonConverters {
     case v: JsValue => v.toString
   }
 
-  def timestampFromValue(jsVal: JsValue): LocalDateTime = jsVal match {
+  def timestampFromValue(jsVal: JsValue): ZonedDateTime = jsVal match {
     case JsString(str) =>
       try {
         dateParse(str)
       } catch {
         case _: Exception =>
-          LocalDateTime.now()
+          ZonedDateTime.now
       }
-    case _ => LocalDateTime.now()
+    case _ => ZonedDateTime.now
   }
 
   def floatFromValue(jsVal: JsValue): Float = jsVal match {
@@ -37,7 +37,7 @@ object JsonConverters {
     case _ => ""
   }
 
-  def dateParse(str: String): LocalDateTime = {
+  def dateParse(str: String): ZonedDateTime = {
     val formatter = new DateTimeFormatterBuilder()
       .parseCaseInsensitive
       .appendValue(ChronoField.YEAR)
@@ -61,7 +61,11 @@ object JsonConverters {
       .parseDefaulting(ChronoField.NANO_OF_SECOND, 0)
       .toFormatter
 
-    LocalDateTime.parse(str, formatter)
+    if (str.contains('[')) {
+      ZonedDateTime.parse(str, DateTimeFormatter.ISO_ZONED_DATE_TIME)
+    }
+    else ZonedDateTime.of(LocalDateTime.parse(str, formatter), ZoneId.of("UCT"))
+
   }
 
   def arrayFromValue(jsVal: JsValue): Seq[String] = jsVal match {

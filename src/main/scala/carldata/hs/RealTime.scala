@@ -1,6 +1,6 @@
 package carldata.hs
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 import carldata.hs.impl.JsonConverters._
@@ -11,7 +11,7 @@ object RealTime {
   sealed trait RealTimeJob
 
   case class AddRealTimeJob(calculationId: String, script: String, inputChannelIds: Seq[String], outputChannelId: String,
-                            startDate: LocalDateTime, endDate: LocalDateTime) extends RealTimeJob
+                            startDate: ZonedDateTime, endDate: ZonedDateTime) extends RealTimeJob
 
   case class RemoveRealTimeJob(calculationId: String) extends RealTimeJob
 
@@ -50,11 +50,13 @@ object RealTime {
               val script: String = fs.get("script").map(textFromLines).getOrElse("")
               val inputChannelIds: Seq[String] = fs.get("inputChannelIds").map(arrayFromValue).getOrElse(Seq())
               val outputChannel: String = fs.get("outputChannelId").map(stringFromValue).getOrElse("")
-              val startDate: LocalDateTime = fs.get("startDate").map(timestampFromValue).getOrElse(LocalDateTime.now())
-              val endDate: LocalDateTime = fs.get("endDate").map(timestampFromValue).getOrElse(LocalDateTime.now())
+              val startDate: ZonedDateTime = fs.get("startDate").map(timestampFromValue).getOrElse(ZonedDateTime.now)
+              val endDate: ZonedDateTime = fs.get("endDate").map(timestampFromValue).getOrElse(ZonedDateTime.now)
               AddRealTimeJob(calculation, script, inputChannelIds, outputChannel, startDate, endDate)
-          }.getOrElse(AddRealTimeJob("", "", Seq(), "", LocalDateTime.now(), LocalDateTime.now()))
+          }.getOrElse(AddRealTimeJob("", "", Seq(), "", ZonedDateTime.now, ZonedDateTime.now))
       }
     }
+
   }
+
 }

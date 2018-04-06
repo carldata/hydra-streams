@@ -1,6 +1,6 @@
 package carldata.hs
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 import carldata.hs.impl.JsonConverters.{stringFromValue, timestampFromValue}
@@ -8,7 +8,8 @@ import spray.json.{DefaultJsonProtocol, JsObject, JsString, JsValue, RootJsonFor
 
 
 object DeleteData {
-  case class DeleteDataRecord(actionId: String, channelId: String, startDate: LocalDateTime, endDate: LocalDateTime)
+
+  case class DeleteDataRecord(actionId: String, channelId: String, startDate: ZonedDateTime, endDate: ZonedDateTime)
 
   object DeleteDataJsonProtocol extends DefaultJsonProtocol {
 
@@ -24,11 +25,13 @@ object DeleteData {
         case JsObject(fs) =>
           val actionId: String = fs.get("actionId").map(stringFromValue).getOrElse("")
           val channelId: String = fs.get("channelId").map(stringFromValue).getOrElse("")
-          val startDate: LocalDateTime = fs.get("startDate").map(timestampFromValue).getOrElse(LocalDateTime.now())
-          val endDate: LocalDateTime = fs.get("endDate").map(timestampFromValue).getOrElse(LocalDateTime.now())
+          val startDate: ZonedDateTime = fs.get("startDate").map(timestampFromValue).getOrElse(ZonedDateTime.now)
+          val endDate: ZonedDateTime = fs.get("endDate").map(timestampFromValue).getOrElse(ZonedDateTime.now)
           DeleteDataRecord(actionId, channelId, startDate, endDate)
-        case _ => DeleteDataRecord("", "", LocalDateTime.now(), LocalDateTime.now())
+        case _ => DeleteDataRecord("", "", ZonedDateTime.now, ZonedDateTime.now)
       }
     }
+
   }
+
 }

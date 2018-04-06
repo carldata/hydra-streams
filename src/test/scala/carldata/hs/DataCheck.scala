@@ -1,13 +1,13 @@
 package carldata.hs
 
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
-import spray.json._
-import carldata.hs.Data.DataRecord
 import carldata.hs.Data.DataJsonProtocol._
+import carldata.hs.Data.DataRecord
 import carldata.hs.avro.DataAvro
 import org.scalacheck.Prop.forAll
 import org.scalacheck.{Gen, Properties}
+import spray.json._
 
 /**
   * Property checks for DataAvro
@@ -17,7 +17,7 @@ object DataCheck extends Properties("Data") {
   private val dataRecordGen = for {
     channel <- Gen.identifier
     value <- Gen.chooseNum(-1000f, 1000f)
-  } yield DataRecord(channel, LocalDateTime.now(), value)
+  } yield DataRecord(channel, ZonedDateTime.now, value)
 
 
   /** Record serialized to json and then parsed back should be the same */
